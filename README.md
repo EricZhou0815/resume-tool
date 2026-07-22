@@ -6,6 +6,28 @@
 
 ---
 
+## 📁 Project Structure
+
+```
+resume-tool/
+├── profile.json         # Career database (single source of truth)
+├── build.py             # CLI entry point
+├── templates/
+│   └── modern.html      # Resume template (Jinja2)
+├── output/
+│   ├── resume.html      # Generated resume
+│   ├── index.html       # Vercel entry point
+│   └── resume.pdf       # Exported PDF
+├── vercel.json          # Vercel config
+└── README.md
+```
+
+## 🧱 Tech Stack
+
+Python 3 · Jinja2 · HTML/CSS · No web framework · Static generation · Deployed on Vercel
+
+---
+
 ## 🤖 Agent / AI Integration
 
 This tool is **agent-first** — designed to be driven by AI agents (Hermes, Claude Code, Codex, etc.), not just humans.
@@ -72,6 +94,20 @@ commands:
 
 data_file: ~/resume-tool/profile.json
 ```
+
+---
+
+## 📋 CLI Reference
+
+| Command | Description |
+|---------|-------------|
+| `python3 build.py` | Full resume, modern template |
+| `python3 build.py --template <name>` | Choose template |
+| `python3 build.py --tags <a,b,c>` | Filter by skill tags |
+| `python3 build.py --jd <file>` | Match experience to job description |
+| `python3 build.py --pdf` | Generate HTML + export PDF |
+| `python3 build.py --list-templates` | List available templates |
+| `python3 build.py --output <name>` | Custom output filename |
 
 ---
 
@@ -168,37 +204,3 @@ Vercel 自动部署。线上版右下角有 **Download PDF** 按钮，点它 →
 > ⚠️ 注意：这个 README 里的演示链接 `resume-tool-liart.vercel.app` 是 Eric 个人的部署地址。
 > **你自己部署后，会得到一个属于你的 Vercel 链接**（比如 `resume-tool-xxx.vercel.app`）。
 > 不要直接使用别人的链接。
-
----
-
-## 📁 Project Structure
-
-```
-resume-tool/
-├── profile.json         # Career database (single source of truth)
-├── build.py             # CLI entry point
-├── templates/
-│   └── modern.html      # Resume template (Jinja2)
-├── output/
-│   ├── resume.html      # Generated resume
-│   ├── index.html       # Vercel entry point
-│   └── resume.pdf       # Exported PDF
-├── vercel.json          # Vercel config
-└── README.md
-```
-
-## 🧱 Tech Stack
-
-Python 3 · Jinja2 · HTML/CSS · No web framework · Static generation · Deployed on Vercel
-
-## 📋 CLI Reference
-
-| Command | Description |
-|---------|-------------|
-| `python3 build.py` | Full resume, modern template |
-| `python3 build.py --template <name>` | Choose template |
-| `python3 build.py --tags <a,b,c>` | Filter by skill tags |
-| `python3 build.py --jd <file>` | Match experience to job description |
-| `python3 build.py --pdf` | Generate HTML + export PDF |
-| `python3 build.py --list-templates` | List available templates |
-| `python3 build.py --output <name>` | Custom output filename |
