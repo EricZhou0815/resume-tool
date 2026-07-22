@@ -129,7 +129,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
     }
 
 def render(template_name: str, context: dict) -> str:
-    """使用 Jinja2 渲染模板"""
+    """Render template with Jinja2"""
     from jinja2 import Environment, FileSystemLoader
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
