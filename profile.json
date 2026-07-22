@@ -1,78 +1,135 @@
 {
   "personal": {
     "name": "Eric Zhou",
-    "title": "Software Developer",
-    "email": "eric@example.com",
-    "phone": "+64 XXX XXX XXX",
-    "location": "Auckland, New Zealand",
-    "linkedin": "https://linkedin.com/in/ericzhou",
-    "github": "https://github.com/EricZhou0815",
-    "website": "",
-    "summary": "Passionate software developer with experience building web applications, AI tools, and family-oriented products. Strong in Python, JavaScript, and cloud deployment."
+    "title": "Engineering Lead",
+    "email": "eric.zhou0815@gmail.com",
+    "phone": "0212516286",
+    "location": "Christchurch, New Zealand",
+    "linkedin": "https://linkedin.com/in/ericzhou0815",
+    "github": "https://github.com/ericzhou0815",
+    "summary": "Hands-on engineering lead with 7 years delivering production-grade systems across insurance, energy, betting, and enterprise platforms. Combines strong technical depth (TypeScript, C#, Java, React, AWS, Azure) with direct people leadership, technical direction, and delivery ownership. Known for pragmatic, outcomes-focused leadership: identifying bottlenecks early, raising engineering standards, and improving team effectiveness across the full development lifecycle."
   },
   "experience": [
     {
       "id": "exp-1",
-      "company": "Self-Employed",
-      "position": "Software Developer",
-      "start_date": "2024-07",
+      "company": "Jade Software",
+      "position": "Engineering Lead",
+      "start_date": "2024-01",
       "end_date": null,
-      "location": "Auckland, NZ",
+      "location": "Christchurch, NZ",
       "current": true,
       "highlights": [
-        "Built family-os, a local CLI-based family task management tool (Python + SQLite)",
-        "Developed runnly-ai, a family collaboration workspace (Next.js + Supabase)",
-        "Created image-ocr, a macOS Vision framework OCR tool",
-        "Orchestrated AI agents (Claude Code, Hermes) for automated dev workflows"
+        "Led a team of 4 direct reports with structured 1:1s, goal setting, pair programming, and code reviews; defined team standards cutting PR rework by ~40% and halving new-joiner time-to-first-PR from 2 weeks to 1 week.",
+        "Owned delivery and system architecture for a major Australian insurance onboarding portal using micro-frontend architecture.",
+        "Built secure, scalable customer onboarding portals for a UK finance client using React, .NET, and Azure.",
+        "Led API modernisation for an Australian trading group, replacing legacy text-based integrations with OpenAPI-driven services; introduced AI-assisted workflows cutting repetitive implementation effort by ~80%.",
+        "Architected and delivered the Proof of Funds AI platform, integrating Google Document AI with React and Azure to fully automate document evaluation.",
+        "Pioneered AI practices across the production development lifecycle, embedding AI-assisted tooling into code generation, review, and testing workflows."
       ],
-      "tags": ["Python", "Next.js", "Supabase", "SQLite", "AI Agents"]
+      "tags": ["TypeScript", "React", ".NET", "Azure", "AI", "Google Document AI", "Micro-frontend", "API Design", "People Leadership"]
+    },
+    {
+      "id": "exp-2",
+      "company": "SECTION6",
+      "position": "Senior Software Engineer",
+      "start_date": "2021-08",
+      "end_date": "2023-12",
+      "location": "Remote, NZ",
+      "current": false,
+      "highlights": [
+        "Co-owned engineering hiring pipeline, growing the team by 5 engineers within 12 months.",
+        "Led a timesheet pre-invoicing automation project end-to-end.",
+        "Built a high-throughput data validation service for Vector's energy platform, processing data from millions of meters daily.",
+        "Designed cloud-native solutions using Java, AWS Lambda, DynamoDB, API Gateway, Step Functions, S3, SQS.",
+        "Established CI/CD pipelines using AWS CodeBuild and Terraform.",
+        "Optimised Lambda performance, reducing cold start times by 30% and improving data processing speed by 20%."
+      ],
+      "tags": ["Java", "AWS", "Lambda", "DynamoDB", "Terraform", "CI/CD", "Energy"]
+    },
+    {
+      "id": "exp-3",
+      "company": "SG Digital",
+      "position": "Software Engineer",
+      "start_date": "2019-08",
+      "end_date": "2021-08",
+      "location": "Wellington, NZ",
+      "current": false,
+      "highlights": [
+        "Developed and maintained high-traffic sports betting systems using React, Node.js, Java.",
+        "Built new betting products and platform features, contributing to significant revenue uplift for TAB NZ."
+      ],
+      "tags": ["React", "Node.js", "Java", "Betting"]
     }
   ],
   "education": [
     {
       "id": "edu-1",
-      "institution": "",
-      "degree": "",
-      "field": "",
-      "start_date": "",
-      "end_date": "",
-      "gpa": "",
+      "institution": "Lincoln University",
+      "degree": "Master of Applied Computing",
+      "field": "Computing",
+      "start_date": "2023-07",
+      "end_date": "2024-12",
+      "grade": "Distinction",
+      "highlights": []
+    },
+    {
+      "id": "edu-2",
+      "institution": "Unitec",
+      "degree": "Graduate Diploma in Computing",
+      "field": "Computing",
+      "start_date": "2018-02",
+      "end_date": "2018-12",
+      "grade": "",
+      "highlights": []
+    },
+    {
+      "id": "edu-3",
+      "institution": "Tongji University",
+      "degree": "Bachelor of Building Technology and Engineering",
+      "field": "Engineering",
+      "start_date": "2006-09",
+      "end_date": "2010-07",
+      "grade": "",
       "highlights": []
     }
   ],
   "skills": {
-    "languages": ["Python", "JavaScript/TypeScript", "Swift", "SQL"],
-    "frameworks": ["Next.js", "FastAPI", "React", "Tailwind CSS"],
-    "tools": ["Git", "Supabase", "Vercel", "Docker", "SQLite"],
-    "ai": ["Prompt Engineering", "LLM Integration", "Agent Orchestration"]
+    "languages": ["TypeScript", "C#", "Java", "Python"],
+    "frameworks": ["React", "Next.js", "Node.js", "FastAPI", ".NET", "Flask"],
+    "cloud": ["AWS", "Azure", "Docker", "ECS", "Lambda", "API Gateway", "S3", "SQS", "Step Functions"],
+    "devops": ["CI/CD", "Terraform", "AWS CodeBuild", "Octopus Deploy", "GitHub Actions"],
+    "ai_llm": ["OpenAI", "Google Document AI", "RAG", "Multi-agent Systems", "Agentic Workflows"],
+    "architecture": ["System Design", "Microservices", "Event-driven Systems", "API Design", "High Availability"]
   },
   "projects": [
     {
       "id": "proj-1",
-      "name": "family-os",
-      "description": "Family task management CLI tool with SQLite database",
-      "tech": ["Python", "SQLite"],
-      "url": "",
-      "highlights": ["Voice-driven task CRUD", "Multi-family support", "Obsidian integration"]
+      "name": "Runnly-ai — User Story to PR Automation Agents System",
+      "description": "Autonomous AI engineer integrated into the SDLC, capable of processing full user stories end-to-end.",
+      "tech": ["AI Agents", "LLM", "Code Generation"],
+      "url": "https://github.com/orgs/Runnly-ai",
+      "highlights": [
+        "Designed an autonomous AI engineer that explores codebases, plans implementations, writes changes, and opens PRs with minimal human intervention.",
+        "Solved advanced challenges in context-window management and LLM tool use for self-correcting code generation."
+      ]
     },
     {
       "id": "proj-2",
-      "name": "runnly-ai",
-      "description": "Family collaboration workspace — like Jira for families",
-      "tech": ["Next.js", "Supabase", "Tailwind CSS"],
+      "name": "Interlify — AI Developer SaaS Platform",
+      "description": "AI tooling SaaS platform helping developers integrate APIs with LLMs. Ranked #4 Product of the Day on Product Hunt.",
+      "tech": ["Next.js", "TypeScript", "Python", "OpenAI", "Groq", "PostgreSQL"],
       "url": "",
-      "highlights": ["Task management", "Family member invites", "Mobile-first design"]
-    },
-    {
-      "id": "proj-3",
-      "name": "image-ocr",
-      "description": "macOS Vision framework OCR tool, zero dependencies",
-      "tech": ["Python", "Objective-C", "Vision Framework"],
-      "url": "",
-      "highlights": ["Accurate text extraction", "Supports JPG/PNG/HEIC"]
+      "highlights": [
+        "Founder & Architect. Designed, built, and launched from scratch.",
+        "Ranked #4 Product of the Day on Product Hunt."
+      ]
     }
   ],
-  "certifications": [],
+  "certifications": [
+    { "name": "AWS Certified Solutions Architect – Professional", "issuer": "AWS", "date": "" },
+    { "name": "AWS Certified Solutions Architect – Associate", "issuer": "AWS", "date": "" },
+    { "name": "Microsoft Certified: Azure Fundamentals", "issuer": "Microsoft", "date": "" }
+  ],
   "languages": [
     { "language": "English", "level": "Fluent" },
     { "language": "Cantonese", "level": "Native" },
