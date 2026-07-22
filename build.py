@@ -14,7 +14,6 @@
 import json, os, sys, re, shutil
 from pathlib import Path
 from datetime import datetime
-import subprocess
 
 BASE = Path.home() / "resume-tool"
 PROFILE_PATH = BASE / "profile.json"
@@ -38,10 +37,10 @@ def list_templates():
 
 def filter_experience(profile: dict, tags: list[str] = None, jd_text: str = None) -> list:
     exps = profile.get("experience", [])
-    
+
     if tags:
         exps = [e for e in exps if any(t.lower() in [x.lower() for x in e.get("tags", [])] for t in tags)]
-    
+
     if jd_text:
         # 简单关键词匹配 — 后续可以加 AI
         jd_lower = jd_text.lower()
@@ -59,7 +58,7 @@ def filter_experience(profile: dict, tags: list[str] = None, jd_text: str = None
         exps = [e for _, e in scored if _ > 0]
         if not exps:
             exps = profile.get("experience", [])
-    
+
     return exps
 
 def filter_projects(profile: dict, tags: list[str] = None) -> list:
@@ -80,7 +79,7 @@ def format_date(date_str: str) -> str:
 def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
     """把 profile 转成模板需要的 context"""
     p = profile["personal"]
-    
+
     # 处理经历
     experiences = []
     for e in exp_filter:
@@ -93,7 +92,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
             "location": e.get("location", ""),
             "highlights": e.get("highlights", []),
         })
-    
+
     # 处理项目
     projects = []
     for pj in proj_filter:
@@ -103,7 +102,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
             "tech": ", ".join(pj.get("tech", [])),
             "highlights": pj.get("highlights", []),
         })
-    
+
     # 处理技能
     skill_groups = []
     for category, items in profile.get("skills", {}).items():
@@ -111,7 +110,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
             "category": category.capitalize(),
             "skill_list": list(items)
         })
-    
+
     return {
         "name": p["name"],
         "title": p["title"],
@@ -132,7 +131,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
 def render(template_name: str, context: dict) -> str:
     """使用 Jinja2 渲染模板"""
     from jinja2 import Environment, FileSystemLoader
-    
+
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
     template = env.get_template(f"{template_name}.html")
     return template.render(**context)
@@ -151,19 +150,18 @@ def main():
     parser.add_argument("--jd", help="职位描述文件路径，自动匹配经历")
     parser.add_argument("--list-templates", action="store_true", help="列出可用模板")
     parser.add_argument("--serve", action="store_true", help="启动预览服务器")
-    parser.add_argument("--pdf", action="store_true", help="生成 HTML 并导出 PDF")
     parser.add_argument("--output", default="resume", help="输出文件名")
     args = parser.parse_args()
-    
+
     if args.list_templates:
         list_templates()
         return
-    
+
     profile = load_profile()
-    
+
     # 解析标签
     tags = [t.strip() for t in args.tags.split(",")] if args.tags else None
-    
+
     # 读取 JD
     jd_text = None
     if args.jd:
@@ -172,37 +170,21 @@ def main():
             jd_text = jd_path.read_text()
         else:
             print(f"⚠️ JD 文件不存在: {args.jd}")
-    
+
     # 筛选经历和项目
     exp_filter = filter_experience(profile, tags, jd_text)
     proj_filter = filter_projects(profile, tags)
-    
+
     # 构建 context
     context = build_context(profile, exp_filter, proj_filter)
-    
+
     # 渲染
     html = render(args.template, context)
     path = save(html, args.output)
-    
+
     # 复制到 output/index.html 方便 Vercel
     shutil.copy(path, OUTPUT_DIR / "index.html")
-    
-    # PDF 导出
-    if args.pdf:
-        pdf_path = OUTPUT_DIR / f"{args.output}.pdf"
-        try:
-            from playwright.sync_api import sync_playwright
-            with sync_playwright() as p:
-                browser = p.chromium.launch()
-                page = browser.new_page()
-                page.goto(f"file://{path.resolve()}")
-                page.pdf(path=str(pdf_path), format="A4", print_background=True)
-                browser.close()
-            print(f"📄 PDF 已导出: {pdf_path}")
-        except Exception as e:
-            print(f"⚠️ PDF 导出失败: {e}")
-            print("   可以浏览器打开 HTML 后 Cmd+P → 另存为 PDF")
-    
+
     count = len(exp_filter)
     print(f"✅ 简历已生成: {path}")
     print(f"   经历: {count} 条 | 模板: {args.template}")

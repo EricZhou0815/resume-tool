@@ -17,8 +17,7 @@
 ```bash
 git clone https://github.com/EricZhou0815/resume-tool.git
 cd resume-tool
-pip3 install jinja2 playwright
-python3 -m playwright install chromium
+pip3 install jinja2
 ```
 
 ### 用法
@@ -57,8 +56,7 @@ A CLI tool that manages your entire career profile in one JSON file (`profile.js
 ```bash
 git clone https://github.com/EricZhou0815/resume-tool.git
 cd resume-tool
-pip3 install jinja2 playwright
-python3 -m playwright install chromium
+pip3 install jinja2
 ```
 
 ### Usage
@@ -94,8 +92,7 @@ This is a pure CLI tool. Any AI agent (Hermes, Claude Code, Codex, etc.) can cal
 
 ```bash
 git clone https://github.com/EricZhou0815/resume-tool.git /path/to/resume-tool
-pip3 install jinja2 playwright
-python3 -m playwright install chromium
+pip3 install jinja2
 ```
 
 ### Calling from code
