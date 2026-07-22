@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{name}} - Resume</title>
+<title>{{ name }} - Resume</title>
 <style>
   :root {
     --primary: #2563eb;
@@ -25,7 +25,6 @@
     background: var(--bg);
     border-radius: 12px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    overflow: hidden;
   }
   .header {
     background: var(--primary);
@@ -44,21 +43,31 @@
     border-bottom: 2px solid var(--border);
     padding-bottom: 8px; margin-bottom: 16px;
   }
-  .section h3 { font-size: 16px; font-weight: 600; }
-  .section .meta { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
-  .section ul { list-style: none; }
-  .section li {
+  .entry { margin-bottom: 20px; }
+  .entry-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .entry-header h3 { font-size: 16px; font-weight: 600; }
+  .entry-header .period { font-size: 14px; color: var(--muted); }
+  .entry .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+  .entry ul { list-style: none; }
+  .entry li {
     font-size: 14px; line-height: 1.6;
-    padding-left: 20px; position: relative; margin-bottom: 6px;
+    padding-left: 20px; position: relative; margin-bottom: 4px;
   }
-  .section li::before {
-    content: "\2022"; position: absolute; left: 4px; color: var(--primary);
-  }
-  .skills-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skills-tags span {
+  .entry li::before { content: "•"; position: absolute; left: 4px; color: var(--primary); }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .skill-group { margin-bottom: 4px; }
+  .skill-group h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tags span {
     background: #eff6ff; color: var(--primary);
-    padding: 4px 12px; border-radius: 20px; font-size: 13px;
+    padding: 3px 10px; border-radius: 20px; font-size: 12px;
   }
+  .project-tech { font-size: 12px; color: var(--primary); margin-bottom: 6px; }
+  .lang-item { font-size: 14px; display: inline-block; margin-right: 20px; }
+  .lang-item .level { color: var(--muted); font-size: 13px; }
   @media print {
     body { padding: 0; background: white; }
     .page { box-shadow: none; border-radius: 0; }
@@ -69,18 +78,102 @@
 <body>
 <div class="page">
   <div class="header">
-    <h1>{{name}}</h1>
-    <div class="title">{{title}}</div>
+    <h1>{{ name }}</h1>
+    <div class="title">{{ title }}</div>
     <div class="contact">
-      <span>{{email}}</span>
-      <span>{{phone}}</span>
-      <span>{{location}}</span>
-      <a href="{{linkedin}}">LinkedIn</a>
-      <a href="{{github}}">GitHub</a>
+      <span>{{ email }}</span>
+      <span>{{ phone }}</span>
+      <span>{{ location }}</span>
+      {% if linkedin %}<a href="{{ linkedin }}">LinkedIn</a>{% endif %}
+      {% if github %}<a href="{{ github }}">GitHub</a>{% endif %}
     </div>
   </div>
   <div class="content">
-    {{content}}
+    {% if summary %}
+    <div class="section">
+      <h2>Summary</h2>
+      <p style="font-size:14px;line-height:1.6;color:var(--text);">{{ summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if experiences %}
+    <div class="section">
+      <h2>Experience</h2>
+      {% for exp in experiences %}
+      <div class="entry">
+        <div class="entry-header">
+          <h3>{{ exp.position }} · {{ exp.company }}</h3>
+          <span class="period">{{ exp.period }}</span>
+        </div>
+        {% if exp.location %}<div class="subtitle">{{ exp.location }}</div>{% endif %}
+        <ul>
+          {% for hl in exp.highlights %}<li>{{ hl }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if skill_groups %}
+    <div class="section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        {% for group in skill_groups %}
+        <div class="skill-group">
+          <h4>{{ group.category }}</h4>
+          <div class="skill-tags">
+            {% for item in group.skill_list %}<span>{{ item }}</span>{% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if projects %}
+    <div class="section">
+      <h2>Projects</h2>
+      {% for pj in projects %}
+      <div class="entry">
+        <div class="entry-header">
+          <h3>{{ pj.name }}</h3>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">{{ pj.description }}</p>
+        <div class="project-tech">{{ pj.tech }}</div>
+        <ul>
+          {% for hl in pj.highlights %}<li>{{ hl }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if education %}
+    <div class="section">
+      <h2>Education</h2>
+      {% for edu in education %}
+      <div class="entry">
+        <div class="entry-header">
+          <h3>{{ edu.institution }}</h3>
+          {% if edu.end_date %}<span class="period">{{ edu.start_date }} - {{ edu.end_date }}</span>{% endif %}
+        </div>
+        <div class="subtitle">{{ edu.degree }} in {{ edu.field }}</div>
+        {% if edu.highlights %}
+        <ul>{% for hl in edu.highlights %}<li>{{ hl }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if languages %}
+    <div class="section">
+      <h2>Languages</h2>
+      {% for lang in languages %}
+      <span class="lang-item">{{ lang.language }} <span class="level">({{ lang.level }})</span></span>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
 </div>
 </body>

@@ -1,0 +1,81 @@
+{
+  "personal": {
+    "name": "Eric Zhou",
+    "title": "Software Developer",
+    "email": "eric@example.com",
+    "phone": "+64 XXX XXX XXX",
+    "location": "Auckland, New Zealand",
+    "linkedin": "https://linkedin.com/in/ericzhou",
+    "github": "https://github.com/EricZhou0815",
+    "website": "",
+    "summary": "Passionate software developer with experience building web applications, AI tools, and family-oriented products. Strong in Python, JavaScript, and cloud deployment."
+  },
+  "experience": [
+    {
+      "id": "exp-1",
+      "company": "Self-Employed",
+      "position": "Software Developer",
+      "start_date": "2024-07",
+      "end_date": null,
+      "location": "Auckland, NZ",
+      "current": true,
+      "highlights": [
+        "Built family-os, a local CLI-based family task management tool (Python + SQLite)",
+        "Developed runnly-ai, a family collaboration workspace (Next.js + Supabase)",
+        "Created image-ocr, a macOS Vision framework OCR tool",
+        "Orchestrated AI agents (Claude Code, Hermes) for automated dev workflows"
+      ],
+      "tags": ["Python", "Next.js", "Supabase", "SQLite", "AI Agents"]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "institution": "",
+      "degree": "",
+      "field": "",
+      "start_date": "",
+      "end_date": "",
+      "gpa": "",
+      "highlights": []
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "JavaScript/TypeScript", "Swift", "SQL"],
+    "frameworks": ["Next.js", "FastAPI", "React", "Tailwind CSS"],
+    "tools": ["Git", "Supabase", "Vercel", "Docker", "SQLite"],
+    "ai": ["Prompt Engineering", "LLM Integration", "Agent Orchestration"]
+  },
+  "projects": [
+    {
+      "id": "proj-1",
+      "name": "family-os",
+      "description": "Family task management CLI tool with SQLite database",
+      "tech": ["Python", "SQLite"],
+      "url": "",
+      "highlights": ["Voice-driven task CRUD", "Multi-family support", "Obsidian integration"]
+    },
+    {
+      "id": "proj-2",
+      "name": "runnly-ai",
+      "description": "Family collaboration workspace — like Jira for families",
+      "tech": ["Next.js", "Supabase", "Tailwind CSS"],
+      "url": "",
+      "highlights": ["Task management", "Family member invites", "Mobile-first design"]
+    },
+    {
+      "id": "proj-3",
+      "name": "image-ocr",
+      "description": "macOS Vision framework OCR tool, zero dependencies",
+      "tech": ["Python", "Objective-C", "Vision Framework"],
+      "url": "",
+      "highlights": ["Accurate text extraction", "Supports JPG/PNG/HEIC"]
+    }
+  ],
+  "certifications": [],
+  "languages": [
+    { "language": "English", "level": "Fluent" },
+    { "language": "Cantonese", "level": "Native" },
+    { "language": "Mandarin", "level": "Native" }
+  ]
+}
