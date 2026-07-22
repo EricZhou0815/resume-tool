@@ -8,11 +8,13 @@
   python3 build.py --tags python,nextjs     # 只包含含这些标签的经历
   python3 build.py --jd jd.txt              # 根据职位描述自动匹配经历
   python3 build.py --list-templates         # 列出可用模板
+  python3 build.py --pdf                    # 生成 HTML 并导出 PDF
   python3 build.py --serve                  # 启动本地预览服务器
 """
 import json, os, sys, re, shutil
 from pathlib import Path
 from datetime import datetime
+import subprocess
 
 BASE = Path.home() / "resume-tool"
 PROFILE_PATH = BASE / "profile.json"
@@ -149,6 +151,7 @@ def main():
     parser.add_argument("--jd", help="职位描述文件路径，自动匹配经历")
     parser.add_argument("--list-templates", action="store_true", help="列出可用模板")
     parser.add_argument("--serve", action="store_true", help="启动预览服务器")
+    parser.add_argument("--pdf", action="store_true", help="生成 HTML 并导出 PDF")
     parser.add_argument("--output", default="resume", help="输出文件名")
     args = parser.parse_args()
     
@@ -183,6 +186,22 @@ def main():
     
     # 复制到 output/index.html 方便 Vercel
     shutil.copy(path, OUTPUT_DIR / "index.html")
+    
+    # PDF 导出
+    if args.pdf:
+        pdf_path = OUTPUT_DIR / f"{args.output}.pdf"
+        try:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                browser = p.chromium.launch()
+                page = browser.new_page()
+                page.goto(f"file://{path.resolve()}")
+                page.pdf(path=str(pdf_path), format="A4", print_background=True)
+                browser.close()
+            print(f"📄 PDF 已导出: {pdf_path}")
+        except Exception as e:
+            print(f"⚠️ PDF 导出失败: {e}")
+            print("   可以浏览器打开 HTML 后 Cmd+P → 另存为 PDF")
     
     count = len(exp_filter)
     print(f"✅ 简历已生成: {path}")
