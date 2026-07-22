@@ -1,106 +1,189 @@
 # Resume Tool 🎯
 
-你的个人职业管理中心。存一份工作经历数据库，随时生成定制简历。
-
-**理念：** 一份数据源（profile.json），多份简历。改内容不改样式，换模板不改内容。
+> 个人职业管理中心 / Personal Career Hub  
+> 一份数据源，多份简历。改内容不改样式，换模板不改内容。  
+> One data source, unlimited resumes. Change content without touching styles, swap templates without rewriting content.
 
 ---
 
-## 人 — 它是干嘛的
+## 🇨🇳 中文
 
-- 把你的所有工作经历、项目、技能存到一个地方（`profile.json`）
-- 选模板 → 一键生成 HTML 简历
-- 根据职位描述（JD）自动匹配最相关的经历
-- 导出 PDF，随时投递
+### 它是干嘛的
 
-## 人 — 怎么用
+把你的所有工作经历、项目、技能存到一个地方（`profile.json`），选模板一键生成 HTML 简历，支持按职位描述（JD）自动匹配经历，导出 PDF 投递。
 
-### 1. 改内容
+### 安装
 
-编辑 `profile.json`，加新经历、改描述、更新技能。结构很直观，按字段填就行。
+```bash
+git clone https://github.com/EricZhou0815/resume-tool.git
+cd resume-tool
+pip3 install jinja2 playwright
+python3 -m playwright install chromium
+```
 
-### 2. 生成简历
+### 用法
+
+```bash
+python3 build.py                              # 全量简历
+python3 build.py --tags python,react,aws      # 按技能筛选
+python3 build.py --jd jd.txt                  # 匹配职位描述
+python3 build.py --template modern            # 选模板
+python3 build.py --pdf                        # 生成 HTML + PDF
+python3 build.py --list-templates             # 列出可用模板
+```
+
+编辑 `profile.json` 更新你的职业数据。改完后跑 `python3 build.py` 即可。
+
+### 部署到 Vercel
 
 ```bash
 python3 build.py
+git add -A && git commit -m "update"
+git push
 ```
 
-浏览器自动打开，右下角 **⬇ Download PDF** 按钮 → 打印 → 另存为 PDF。
+Vercel 自动部署。线上版右下角有 Download PDF 按钮，点它 → 浏览器打印 → 另存为 PDF。
 
-### 3. 针对 JD 定制
+---
 
-把职位描述存成 `jd.txt`：
+## 🇬🇧 English
+
+### What it is
+
+A CLI tool that manages your entire career profile in one JSON file (`profile.json`) and generates tailored resumes from it. Pick a template, filter by skills, match against a job description — one command, one HTML resume.
+
+### Installation
 
 ```bash
-python3 build.py --jd jd.txt
+git clone https://github.com/EricZhou0815/resume-tool.git
+cd resume-tool
+pip3 install jinja2 playwright
+python3 -m playwright install chromium
 ```
 
-工具会自动匹配相关经历，生成定向简历。
-
-### 4. 按技能筛选
+### Usage
 
 ```bash
-python3 build.py --tags python,react,aws
+python3 build.py                              # Full resume
+python3 build.py --tags python,react,aws      # Filter by skill tags
+python3 build.py --jd jd.txt                  # Match against a job description
+python3 build.py --template modern            # Choose a template
+python3 build.py --pdf                        # Generate HTML + export PDF
+python3 build.py --list-templates             # List available templates
 ```
 
-只包含有这些标签的经历和项目。
+Edit `profile.json` to update your career data. Run `python3 build.py` to regenerate.
 
-### 5. 选模板
-
-```bash
-python3 build.py --template modern
-```
-
-目前只有一个 modern 模板，后续会加更多。
-
-### 6. 部署到线上
+### Deploy to Vercel
 
 ```bash
 python3 build.py
-git add -A && git commit -m "update" && git push
+git add -A && git commit -m "update"
+git push
 ```
 
-Vercel 自动部署，访问 `https://resume-tool-liart.vercel.app` 就能看到线上版。点 Download PDF 一样能导出。
+Vercel auto-deploys. The live site has a **Download PDF** button in the bottom-right corner.
 
 ---
 
-## Agent（AI / Hermes）— 怎么用
+## 🤖 Agent / AI Integration
 
-`build.py` 支持所有参数，Agent 可以直接调：
+This is a pure CLI tool. Any AI agent (Hermes, Claude Code, Codex, etc.) can call it directly.
 
+### Setup for agents
+
+```bash
+git clone https://github.com/EricZhou0815/resume-tool.git /path/to/resume-tool
+pip3 install jinja2 playwright
+python3 -m playwright install chromium
 ```
-python3 build.py                          # 全量简历
-python3 build.py --tags python            # 筛选技能
-python3 build.py --jd ~/jd.txt            # 匹配职位
-python3 build.py --template modern --pdf  # 出 HTML + PDF
+
+### Calling from code
+
+```python
+import subprocess, json
+
+# Build a resume
+subprocess.run(["python3", "/path/to/resume-tool/build.py"])
+
+# With filters
+subprocess.run([
+    "python3", "/path/to/resume-tool/build.py",
+    "--tags", "aws,react",
+    "--jd", "/path/to/jd.txt",
+    "--pdf"
+])
+
+# Read and update the profile database
+with open("/path/to/resume-tool/profile.json") as f:
+    profile = json.load(f)
+
+# Add a new experience entry
+profile["experience"].append({
+    "id": "exp-4",
+    "company": "...",
+    "position": "...",
+    "start_date": "2025-01",
+    "end_date": None,
+    "current": True,
+    "highlights": ["..."],
+    "tags": ["..."]
+})
+
+with open("/path/to/resume-tool/profile.json", "w") as f:
+    json.dump(profile, f, indent=2, ensure_ascii=False)
+
+# Regenerate after updating
+subprocess.run(["python3", "/path/to/resume-tool/build.py"])
 ```
 
-`profile.json` 是唯一的职业数据库，Agent 直接编辑它来增删改经历。格式是标准 JSON，写脚本解析或直接改都行。
+### Hermes skill snippet
 
-**更新经历流程：**
-1. 读取 `profile.json`
-2. 修改对应字段（experience / projects / skills 等）
-3. 写回
-4. 跑 `python3 build.py` 验证效果
+Paste this into a Hermes skill file to let Ericada use resume-tool:
+
+```yaml
+name: resume-tool  
+description: Resume builder — manage career database, generate tailored resumes
+
+commands:
+  - "python3 ~/resume-tool/build.py"
+  - "python3 ~/resume-tool/build.py --tags <skills>"
+  - "python3 ~/resume-tool/build.py --jd <file>"
+  - "python3 ~/resume-tool/build.py --pdf"
+
+data_file: ~/resume-tool/profile.json
+```
 
 ---
 
-## 项目结构
+## 📁 Project Structure
 
 ```
 resume-tool/
-├── profile.json        ← 你的职业数据库（唯一内容源）
-├── build.py            ← 构建脚本
+├── profile.json         # Career database (single source of truth)
+├── build.py             # CLI entry point
 ├── templates/
-│   └── modern.html     ← 简历模板（Jinja2）
+│   └── modern.html      # Resume template (Jinja2)
 ├── output/
-│   ├── resume.html     ← 生成的简历
-│   ├── index.html      ← Vercel 入口
-│   └── resume.pdf      ← 导出的 PDF
-├── vercel.json         ← Vercel 部署配置
+│   ├── resume.html      # Generated resume
+│   ├── index.html       # Vercel entry point
+│   └── resume.pdf       # Exported PDF
+├── vercel.json          # Vercel config
 └── README.md
 ```
 
-## 技术栈
+## 🧱 Tech Stack
 
-Python 3 + Jinja2 + Playwright + HTML/CSS。零 Web 框架，纯静态生成。部署在 Vercel。
+Python 3 · Jinja2 · Playwright · HTML/CSS · No web framework · Static generation · Deployed on Vercel
+
+## 📋 CLI Reference
+
+| Command | Description |
+|---------|-------------|
+| `python3 build.py` | Full resume, modern template |
+| `python3 build.py --template <name>` | Choose template |
+| `python3 build.py --tags <a,b,c>` | Filter by skill tags |
+| `python3 build.py --jd <file>` | Match experience to job description |
+| `python3 build.py --pdf` | Generate HTML + export PDF |
+| `python3 build.py --list-templates` | List available templates |
+| `python3 build.py --output <name>` | Custom output filename |
