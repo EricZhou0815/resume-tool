@@ -3,13 +3,13 @@
 简历构建工具 v2 — 从职业数据库生成定制简历
 
 用法:
-  python3 build.py                          # 默认：所有经历，modern 模板
-  python3 build.py --template classic       # 选模板
-  python3 build.py --tags python,nextjs     # 只包含含这些标签的经历
-  python3 build.py --jd jd.txt              # 根据职位描述自动匹配经历
-  python3 build.py --list-templates         # 列出可用模板
-  python3 build.py --pdf                    # 生成 HTML 并导出 PDF
-  python3 build.py --serve                  # 启动本地预览服务器
+  python3 build.py                          # Default: all experience, modern template
+  python3 build.py --template classic       # Choose a template
+  python3 build.py --tags python,nextjs     # Filter by skill tags
+  python3 build.py --jd jd.txt              # Match experience against a job description
+  python3 build.py --list-templates         # List available templates
+  python3 build.py --pdf                    # Generate HTML + export PDF
+  python3 build.py --serve                  # Start local preview server
 """
 import json, os, sys, re, shutil
 from pathlib import Path
@@ -27,7 +27,7 @@ def load_profile() -> dict:
 def load_template(name: str) -> str:
     path = TEMPLATES_DIR / f"{name}.html"
     if not path.exists():
-        print(f"⚠️ 模板 '{name}' 不存在，使用 modern")
+        print(f"⚠️ Template '{name}'  not found, using  modern")
         path = TEMPLATES_DIR / "modern.html"
     return path.read_text()
 
@@ -42,7 +42,7 @@ def filter_experience(profile: dict, tags: list[str] = None, jd_text: str = None
         exps = [e for e in exps if any(t.lower() in [x.lower() for x in e.get("tags", [])] for t in tags)]
 
     if jd_text:
-        # 简单关键词匹配 — 后续可以加 AI
+        # Filter experience by tags or match against a job description
         jd_lower = jd_text.lower()
         scored = []
         for e in exps:
@@ -77,10 +77,10 @@ def format_date(date_str: str) -> str:
         return date_str
 
 def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
-    """把 profile 转成模板需要的 context"""
+    """Build template context from profile"""
     p = profile["personal"]
 
-    # 处理经历
+    # Process experience entries
     experiences = []
     for e in exp_filter:
         start = format_date(e.get("start_date", ""))
@@ -93,7 +93,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
             "highlights": e.get("highlights", []),
         })
 
-    # 处理项目
+    # Process project entries
     projects = []
     for pj in proj_filter:
         projects.append({
@@ -103,7 +103,7 @@ def build_context(profile: dict, exp_filter: list, proj_filter: list) -> dict:
             "highlights": pj.get("highlights", []),
         })
 
-    # 处理技能
+    # Process skill groups
     skill_groups = []
     for category, items in profile.get("skills", {}).items():
         skill_groups.append({
@@ -159,30 +159,30 @@ def main():
 
     profile = load_profile()
 
-    # 解析标签
+    # Parse tags from comma-separated string
     tags = [t.strip() for t in args.tags.split(",")] if args.tags else None
 
-    # 读取 JD
+    # Read job description from file
     jd_text = None
     if args.jd:
         jd_path = Path(args.jd)
         if jd_path.exists():
             jd_text = jd_path.read_text()
         else:
-            print(f"⚠️ JD 文件不存在: {args.jd}")
+            print(f"⚠️ JD file not found: {args.jd}")
 
-    # 筛选经历和项目
+    # Filter experience and projects
     exp_filter = filter_experience(profile, tags, jd_text)
     proj_filter = filter_projects(profile, tags)
 
-    # 构建 context
+    # Build template context
     context = build_context(profile, exp_filter, proj_filter)
 
-    # 渲染
+    # Render template
     html = render(args.template, context)
     path = save(html, args.output)
 
-    # 复制到 output/index.html 方便 Vercel
+    # Copy to output/index.html for Vercel entry point
     shutil.copy(path, OUTPUT_DIR / "index.html")
 
     count = len(exp_filter)
