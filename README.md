@@ -6,6 +6,75 @@
 
 ---
 
+## 🤖 Agent / AI Integration
+
+This tool is **agent-first** — designed to be driven by AI agents (Hermes, Claude Code, Codex, etc.), not just humans.
+
+### Setup for agents
+
+```bash
+git clone https://github.com/EricZhou0815/resume-tool.git /path/to/resume-tool
+pip3 install jinja2
+```
+
+### Calling from code
+
+```python
+import subprocess, json
+
+# Build a resume
+subprocess.run(["python3", "/path/to/resume-tool/build.py"])
+
+# With filters
+subprocess.run([
+    "python3", "/path/to/resume-tool/build.py",
+    "--tags", "aws,react",
+    "--jd", "/path/to/jd.txt",
+    "--pdf"
+])
+
+# Read and update the profile database
+with open("/path/to/resume-tool/profile.json") as f:
+    profile = json.load(f)
+
+# Add a new experience entry
+profile["experience"].append({
+    "id": "exp-4",
+    "company": "...",
+    "position": "...",
+    "start_date": "2025-01",
+    "end_date": None,
+    "current": True,
+    "highlights": ["..."],
+    "tags": ["..."]
+})
+
+with open("/path/to/resume-tool/profile.json", "w") as f:
+    json.dump(profile, f, indent=2, ensure_ascii=False)
+
+# Regenerate after updating
+subprocess.run(["python3", "/path/to/resume-tool/build.py"])
+```
+
+### Hermes skill snippet
+
+Paste this into a Hermes skill file to let your agent use resume-tool:
+
+```yaml
+name: resume-tool  
+description: Resume builder — manage career database, generate tailored resumes
+
+commands:
+  - "python3 ~/resume-tool/build.py"
+  - "python3 ~/resume-tool/build.py --tags <skills>"
+  - "python3 ~/resume-tool/build.py --jd <file>"
+  - "python3 ~/resume-tool/build.py --pdf"
+
+data_file: ~/resume-tool/profile.json
+```
+
+---
+
 ## 🇬🇧 English
 
 ### What it is
@@ -99,75 +168,6 @@ Vercel 自动部署。线上版右下角有 **Download PDF** 按钮，点它 →
 > ⚠️ 注意：这个 README 里的演示链接 `resume-tool-liart.vercel.app` 是 Eric 个人的部署地址。
 > **你自己部署后，会得到一个属于你的 Vercel 链接**（比如 `resume-tool-xxx.vercel.app`）。
 > 不要直接使用别人的链接。
-
----
-
-## 🤖 Agent / AI Integration
-
-This is a pure CLI tool. Any AI agent (Hermes, Claude Code, Codex, etc.) can call it directly.
-
-### Setup for agents
-
-```bash
-git clone https://github.com/EricZhou0815/resume-tool.git /path/to/resume-tool
-pip3 install jinja2
-```
-
-### Calling from code
-
-```python
-import subprocess, json
-
-# Build a resume
-subprocess.run(["python3", "/path/to/resume-tool/build.py"])
-
-# With filters
-subprocess.run([
-    "python3", "/path/to/resume-tool/build.py",
-    "--tags", "aws,react",
-    "--jd", "/path/to/jd.txt",
-    "--pdf"
-])
-
-# Read and update the profile database
-with open("/path/to/resume-tool/profile.json") as f:
-    profile = json.load(f)
-
-# Add a new experience entry
-profile["experience"].append({
-    "id": "exp-4",
-    "company": "...",
-    "position": "...",
-    "start_date": "2025-01",
-    "end_date": None,
-    "current": True,
-    "highlights": ["..."],
-    "tags": ["..."]
-})
-
-with open("/path/to/resume-tool/profile.json", "w") as f:
-    json.dump(profile, f, indent=2, ensure_ascii=False)
-
-# Regenerate after updating
-subprocess.run(["python3", "/path/to/resume-tool/build.py"])
-```
-
-### Hermes skill snippet
-
-Paste this into a Hermes skill file to let your agent use resume-tool:
-
-```yaml
-name: resume-tool  
-description: Resume builder — manage career database, generate tailored resumes
-
-commands:
-  - "python3 ~/resume-tool/build.py"
-  - "python3 ~/resume-tool/build.py --tags <skills>"
-  - "python3 ~/resume-tool/build.py --jd <file>"
-  - "python3 ~/resume-tool/build.py --pdf"
-
-data_file: ~/resume-tool/profile.json
-```
 
 ---
 
