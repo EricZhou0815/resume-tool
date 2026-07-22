@@ -36,12 +36,21 @@ python3 build.py --list-templates             # 列出可用模板
 ### 部署到 Vercel
 
 ```bash
+# 1. Fork 或 clone 这个仓库到你自己的 GitHub
+# 2. 在 https://vercel.com 导入你的仓库
+# 3. 部署即可，Vercel 会自动识别静态文件
+
+# 本地更新内容后：
 python3 build.py
-git add -A && git commit -m "update"
+git add -A && git commit -m "update resume"
 git push
 ```
 
-Vercel 自动部署。线上版右下角有 Download PDF 按钮，点它 → 浏览器打印 → 另存为 PDF。
+Vercel 自动部署。线上版右下角有 **Download PDF** 按钮，点它 → 浏览器打印 → 另存为 PDF。
+
+> ⚠️ 注意：这个 README 里的演示链接 `resume-tool-liart.vercel.app` 是 Eric 个人的部署地址。
+> **你自己部署后，会得到一个属于你的 Vercel 链接**（比如 `resume-tool-xxx.vercel.app`）。
+> 不要直接使用别人的链接。
 
 ---
 
@@ -75,12 +84,21 @@ Edit `profile.json` to update your career data. Run `python3 build.py` to regene
 ### Deploy to Vercel
 
 ```bash
+# 1. Fork or clone this repo to your own GitHub
+# 2. Import your repo at https://vercel.com
+# 3. Deploy — Vercel auto-detects static files
+
+# After updating content locally:
 python3 build.py
-git add -A && git commit -m "update"
+git add -A && git commit -m "update resume"
 git push
 ```
 
-Vercel auto-deploys. The live site has a **Download PDF** button in the bottom-right corner.
+Vercel auto-deploys. Click **Download PDF** on the live site → browser print → save as PDF.
+
+> ⚠️ The demo link `resume-tool-liart.vercel.app` in this README is Eric's personal deployment.
+> **Your own deployment will get its own Vercel URL** (e.g. `resume-tool-xxx.vercel.app`).
+> Don't use someone else's link — deploy your own.
 
 ---
 
