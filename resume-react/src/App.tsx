@@ -49,7 +49,7 @@ interface Language {
   level: string
 }
 
-const TEMPLATES = ['modern', 'classic', 'investment-bank']
+const TEMPLATES = ['modern', 'classic', 'investment-bank', 'sidebar']
 
 function App() {
   const [data, setData] = useState<ResumeData | null>(null)
@@ -78,6 +78,7 @@ function App() {
         {template === 'modern' && <ModernTemplate data={data} />}
         {template === 'classic' && <ClassicTemplate data={data} />}
         {template === 'investment-bank' && <IBTemplate data={data} />}
+        {template === 'sidebar' && <SidebarTemplate data={data} />}
       </div>
     </div>
   )
@@ -222,6 +223,71 @@ function IBTemplate({ data }: { data: ResumeData }) {
         <div className="ib-skills">
           {data.skill_groups.map((g, i) => (
             <div key={i}><strong>{g.category}:</strong> {g.skill_list.join(', ')}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SidebarTemplate({ data }: { data: ResumeData }) {
+  const sideSkillGroups = data.skill_groups.filter((_, i) => i % 2 === 0)
+  const mainSkillGroups = data.skill_groups.filter((_, i) => i % 2 !== 0)
+
+  return (
+    <div className="page sb-page">
+      <div className="sb-sidebar">
+        <div className="sb-name">{data.name}</div>
+        <div className="sb-title">{data.title}</div>
+
+        <div className="sb-section">
+          <h2>Contact</h2>
+          <div className="sb-contact">{data.email}</div>
+          <div className="sb-contact">{data.phone}</div>
+          {data.linkedin && <div className="sb-contact">{data.linkedin}</div>}
+          {data.github && <div className="sb-contact">{data.github}</div>}
+        </div>
+
+        <div className="sb-section">
+          <h2>Skills</h2>
+          {data.skill_groups.map((g, i) => (
+            <div key={i} style={{marginBottom:8}}>
+              <div className="sb-skill-cat">{g.category}</div>
+              {g.skill_list.map((s, j) => (
+                <span key={j} className="sb-skill-tag">{s}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {data.languages.length > 0 && (
+          <div className="sb-section">
+            <h2>Languages</h2>
+            {data.languages.map((l, i) => (
+              <div key={i} className="sb-contact">{l.language} — {l.level}</div>
+            ))}
+          </div>
+        )}
+      </div>
+      <div className="sb-main">
+        {data.summary && (
+          <div className="sb-main-section">
+            <h2>Summary</h2>
+            <p>{data.summary}</p>
+          </div>
+        )}
+        <div className="sb-main-section">
+          <h2>Experience</h2>
+          {data.experiences.map((exp, i) => (
+            <div key={i} style={{marginBottom:16}}>
+              <div className="sb-exp-header">
+                <strong>{exp.position}, {exp.company}</strong>
+                <span className="sb-period">{exp.period}</span>
+              </div>
+              <ul style={{fontSize:'13px',lineHeight:1.5, marginLeft:16}}>
+                {exp.highlights.map((h, j) => <li key={j}>{h}</li>)}
+              </ul>
+            </div>
           ))}
         </div>
       </div>
