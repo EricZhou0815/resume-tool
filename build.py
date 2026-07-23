@@ -142,6 +142,69 @@ def save(html: str, name: str = "resume"):
     path.write_text(html)
     return path
 
+def build_switchable_page(templates_html: list, context: dict, active: str) -> str:
+    """Build a page that contains all templates and switches between them via JS."""
+    template_names = sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")])
+    
+    # Build the switcher bar HTML
+    switcher_buttons = ""
+    for name in template_names:
+        active_class = 'active' if name == active else ''
+        label = name.capitalize()
+        switcher_buttons += f'<button class="{active_class}" onclick="switchTemplate(\'{name}\')">{label}</button>'
+    
+    # Wrap each template in a div with its name as id
+    template_divs = ""
+    for name, html in zip(template_names, templates_html):
+        display = 'block' if name == active else 'none'
+        template_divs += f'<div id="template-{name}" style="display:{display}">{html}</div>\n'
+    
+    page = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{context["name"]} - Resume</title>
+<style>
+  .global-switcher {{
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    z-index: 1000; display: flex; gap: 6px;
+    background: rgba(255,255,255,0.95); padding: 8px 14px;
+    border-radius: 30px; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  }}
+  .global-switcher button {{
+    border: 1px solid #d0d0d0; background: white; padding: 7px 16px;
+    border-radius: 20px; font-size: 13px; cursor: pointer; transition: 0.15s;
+  }}
+  .global-switcher button.active {{ background: #2563eb; color: white; border-color: #2563eb; }}
+  .global-switcher button:hover:not(.active) {{ background: #f0f0f0; }}
+</style>
+</head>
+<body>
+<div class="global-switcher">
+  {switcher_buttons}
+</div>
+{template_divs}
+<script>
+function switchTemplate(name) {{
+  var templates = {json.dumps(template_names)};
+  for (var i = 0; i < templates.length; i++) {{
+    var el = document.getElementById('template-' + templates[i]);
+    var btn = document.querySelectorAll('.global-switcher button')[i];
+    if (templates[i] === name) {{
+      el.style.display = 'block';
+      btn.classList.add('active');
+    }} else {{
+      el.style.display = 'none';
+      btn.classList.remove('active');
+    }}
+  }}
+}}
+</script>
+</body>
+</html>'''
+    return page
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="简历构建工具")
@@ -180,7 +243,15 @@ def main():
 
     # Render template
     html = render(args.template, context)
-    path = save(html, args.output)
+    
+    # Wrap in HTML that includes all templates for client-side switching
+    all_templates_html = []
+    for tpl_name in sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")]):
+        all_templates_html.append(render(tpl_name, context))
+    
+    # Build a page that loads all templates and lets you switch
+    page_html = build_switchable_page(all_templates_html, context, args.template)
+    path = save(page_html, args.output)
 
     # Copy to output/index.html for Vercel entry point
     shutil.copy(path, OUTPUT_DIR / "index.html")

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ name }} - Resume</title>
+<style>
+  :root {
+    --text: #222;
+    --muted: #555;
+    --line: #ccc;
+    --bg: #fff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', Georgia, serif;
+    color: var(--text);
+    background: #eee;
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 800px; margin: 0 auto;
+    background: var(--bg); padding: 50px 55px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .title { font-size: 15px; color: var(--muted); margin-top: 4px; }
+  .contact { font-size: 13px; color: var(--muted); margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 18px; }
+  .contact a { color: var(--muted); }
+  .section { margin-bottom: 22px; }
+  .section h2 {
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; border-bottom: 1px solid var(--line);
+    padding-bottom: 4px; margin-bottom: 12px;
+  }
+  .entry { margin-bottom: 16px; }
+  .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .entry-header h3 { font-size: 15px; font-weight: 700; }
+  .entry-header .period { font-size: 13px; color: var(--muted); font-style: italic; }
+  .entry .subtitle { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+  .entry li { font-size: 13px; line-height: 1.5; margin-bottom: 2px; margin-left: 18px; }
+  .skills-line { font-size: 13px; line-height: 1.7; }
+  .skills-line strong { display: inline-block; min-width: 90px; }
+  .download-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #333; color: white; border: none;
+    padding: 10px 18px; border-radius: 4px; font-size: 13px; cursor: pointer;
+    z-index: 100;
+  }
+  .template-switcher {
+    position: fixed; bottom: 24px; left: 24px; z-index: 100;
+    display: flex; gap: 8px;
+  }
+  .template-switcher button {
+    background: #eee; border: 1px solid #ccc; padding: 8px 14px;
+    border-radius: 4px; font-size: 13px; cursor: pointer;
+  }
+  .template-switcher button.active { background: #333; color: white; border-color: #333; }
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; padding: 0.5in; }
+    .download-btn, .template-switcher { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="template-switcher">
+  <button onclick="switchTemplate('modern')">Modern</button>
+  <button class="active" onclick="switchTemplate('classic')">Classic</button>
+</div>
+<div class="download-btn" onclick="window.print()">⬇ PDF</div>
+<div class="page">
+  <div class="header">
+    <h1>{{ name }}</h1>
+    <div class="title">{{ title }}</div>
+    <div class="contact">
+      <span>Email: {{ email }}</span>
+      <span>Phone: {{ phone }}</span>
+      {% if linkedin %}<span>LinkedIn: <a href="{{ linkedin }}">{{ linkedin }}</a></span>{% endif %}
+      {% if github %}<span>GitHub: <a href="{{ github }}">{{ github }}</a></span>{% endif %}
+    </div>
+  </div>
+
+  {% if summary %}
+  <div class="section">
+    <h2>Summary</h2>
+    <p style="font-size:13px;line-height:1.5;">{{ summary }}</p>
+  </div>
+  {% endif %}
+
+  {% if experiences %}
+  <div class="section">
+    <h2>Experience</h2>
+    {% for exp in experiences %}
+    <div class="entry">
+      <div class="entry-header">
+        <h3>{{ exp.position }}, {{ exp.company }}</h3>
+        <span class="period">{{ exp.period }}</span>
+      </div>
+      {% if exp.location %}<div class="subtitle">{{ exp.location }}</div>{% endif %}
+      <ul>
+        {% for hl in exp.highlights %}<li>{{ hl }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if skill_groups %}
+  <div class="section">
+    <h2>Skills</h2>
+    <div class="skills-line">
+      {% for group in skill_groups %}
+      <strong>{{ group.category }}:</strong> {{ group.skill_list | join(", ") }}<br>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if projects %}
+  <div class="section">
+    <h2>Projects</h2>
+    {% for pj in projects %}
+    <div class="entry">
+      <div class="entry-header"><h3>{{ pj.name }}</h3></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:2px;">{{ pj.description }}</p>
+      <ul>
+        {% for hl in pj.highlights %}<li>{{ hl }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if education %}
+  <div class="section">
+    <h2>Education</h2>
+    {% for edu in education %}
+    <div class="entry">
+      <div class="entry-header">
+        <h3>{{ edu.institution }}</h3>
+        {% if edu.end_date %}<span class="period">{{ edu.start_date }} - {{ edu.end_date }}</span>{% endif %}
+      </div>
+      <div class="subtitle">{{ edu.degree }}{% if edu.field %} in {{ edu.field }}{% endif %}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if languages %}
+  <div class="section">
+    <h2>Languages</h2>
+    <p style="font-size:13px;">
+      {% for lang in languages %}{{ lang.language }} ({{ lang.level }}){% if not loop.last %} · {% endif %}{% endfor %}
+    </p>
+  </div>
+  {% endif %}
+</div>
+<script>
+function switchTemplate(name) {
+  // Reload the page with a query param to tell the backend which template
+  window.location.href = '?template=' + name;
+}
+</script>
+</body>
+</html>
