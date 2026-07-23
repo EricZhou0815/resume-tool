@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ name }} - Resume</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Calibri', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1a1a;
+    background: #d8d8d8;
+    padding: 40px 20px;
+    font-size: 11.5pt;
+    line-height: 1.35;
+  }
+  .page {
+    max-width: 210mm; margin: 0 auto;
+    background: white; padding: 30px 35px 30px 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    min-height: 297mm;
+  }
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1.5px solid #1a1a1a;
+  }
+  .header-left h1 {
+    font-size: 22pt; font-weight: 600; letter-spacing: 0.3px;
+    color: #000;
+  }
+  .header-left .title {
+    font-size: 12pt; color: #444; margin-top: 1px; font-weight: 400;
+  }
+  .header-right {
+    text-align: right; font-size: 10pt; color: #333; line-height: 1.6;
+  }
+  .header-right a { color: #333; text-decoration: none; }
+  .header-right a:hover { text-decoration: underline; }
+  .section { margin-bottom: 13px; }
+  .section h2 {
+    font-size: 11pt; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: #000;
+    border-bottom: 0.5px solid #999;
+    padding-bottom: 2px; margin-bottom: 6px;
+  }
+  .entry { margin-bottom: 10px; }
+  .entry-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .entry-header h3 {
+    font-size: 11pt; font-weight: 700; color: #000;
+  }
+  .entry-header .location {
+    font-size: 10pt; color: #555; font-weight: 400;
+  }
+  .entry-header .period {
+    font-size: 10pt; color: #555; white-space: nowrap;
+  }
+  .entry .sub-meta {
+    font-size: 10.5pt; font-weight: 600; color: #333;
+    font-style: italic; margin-bottom: 1px;
+  }
+  .entry p { font-size: 10.5pt; line-height: 1.4; color: #333; }
+  .entry ul { list-style: none; margin-top: 1px; }
+  .entry li {
+    font-size: 10.5pt; line-height: 1.4; margin-bottom: 1px;
+    padding-left: 14px; position: relative;
+  }
+  .entry li::before { content: "•"; position: absolute; left: 0; color: #000; }
+  .skills-block { font-size: 10.5pt; line-height: 1.6; }
+  .skills-block strong { font-weight: 700; }
+  .two-col { display: flex; gap: 20px; }
+  .two-col > div { flex: 1; }
+  .compact-list li { font-size: 10pt; margin-bottom: 0.5px; }
+  .download-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: #1a1a1a; color: white; border: none;
+    padding: 10px 20px; border-radius: 4px; font-size: 12px;
+    cursor: pointer;
+  }
+  .download-btn:hover { background: #333; }
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; padding: 0.4in 0.45in; }
+    .download-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="download-btn" onclick="window.print()">⬇ PDF</div>
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <h1>{{ name }}</h1>
+      <div class="title">{{ title }}</div>
+    </div>
+    <div class="header-right">
+      <div>{{ phone }}</div>
+      <div>{{ email }}</div>
+      {% if linkedin %}<div><a href="{{ linkedin }}">LinkedIn</a></div>{% endif %}
+      {% if github %}<div><a href="{{ github }}">GitHub</a></div>{% endif %}
+    </div>
+  </div>
+
+  {% if summary %}
+  <div class="section">
+    <h2>Professional Summary</h2>
+    <p>{{ summary }}</p>
+  </div>
+  {% endif %}
+
+  {% if experiences %}
+  <div class="section">
+    <h2>Experience</h2>
+    {% for exp in experiences %}
+    <div class="entry">
+      <div class="entry-header">
+        <h3>{{ exp.position }}</h3>
+        <span class="period">{{ exp.period }}</span>
+      </div>
+      <div class="sub-meta">{{ exp.company }}</div>
+      {% if exp.location %}<div style="font-size:10pt;color:#555;margin-bottom:1px;">{{ exp.location }}</div>{% endif %}
+      <ul>
+        {% for hl in exp.highlights %}<li>{{ hl }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if skill_groups %}
+  <div class="section">
+    <h2>Skills &amp; Expertise</h2>
+    <div class="two-col">
+      <div class="skills-block">
+        {% for group in skill_groups %}
+          {% if loop.index <= (skill_groups|length + 1)//2 %}
+            <strong>{{ group.category }}:</strong> {{ group.skill_list | join(", ") }}<br>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="skills-block">
+        {% for group in skill_groups %}
+          {% if loop.index > (skill_groups|length + 1)//2 %}
+            <strong>{{ group.category }}:</strong> {{ group.skill_list | join(", ") }}<br>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if education %}
+  <div class="section">
+    <h2>Education</h2>
+    {% for edu in education %}
+    <div class="entry">
+      <div class="entry-header">
+        <h3>{{ edu.institution }}</h3>
+        {% if edu.end_date %}<span class="period">{{ edu.start_date }} - {{ edu.end_date }}</span>{% endif %}
+      </div>
+      <div class="sub-meta">{{ edu.degree }}{% if edu.field %} in {{ edu.field }}{% endif %}
+        {% if edu.grade %} — {{ edu.grade }}{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if certifications %}
+  <div class="section">
+    <h2>Certifications</h2>
+    <ul class="compact-list">
+      {% for cert in certifications %}
+      <li>{{ cert.name }}{% if cert.issuer %} — {{ cert.issuer }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if languages %}
+  <div class="section">
+    <h2>Languages</h2>
+    <p style="font-size:10.5pt;">
+      {% for lang in languages %}{{ lang.language }} ({{ lang.level }}){% if not loop.last %} | {% endif %}{% endfor %}
+    </p>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>
