@@ -92,8 +92,8 @@ function ModernTemplate({ data }: { data: ResumeData }) {
         <div className="modern-contact">
           <span>Email: {data.email}</span>
           <span>Phone: {data.phone}</span>
-          {data.linkedin && <span>LinkedIn: <a href={data.linkedin}>{data.linkedin}</a></span>}
-          {data.github && <span>GitHub: <a href={data.github}>{data.github}</a></span>}
+          {data.linkedin && <span>LinkedIn: {data.linkedin}</span>}
+          {data.github && <span>GitHub: {data.github}</span>}
         </div>
       </div>
       <div className="modern-body">
@@ -151,8 +151,8 @@ function ClassicTemplate({ data }: { data: ResumeData }) {
         <div className="classic-contact">
           <span>Email: {data.email}</span>
           <span>Phone: {data.phone}</span>
-          {data.linkedin && <span>LinkedIn: <a href={data.linkedin}>{data.linkedin}</a></span>}
-          {data.github && <span>GitHub: <a href={data.github}>{data.github}</a></span>}
+          {data.linkedin && <span>LinkedIn: {data.linkedin}</span>}
+          {data.github && <span>GitHub: {data.github}</span>}
         </div>
       </div>
       {data.summary && (
@@ -194,8 +194,8 @@ function IBTemplate({ data }: { data: ResumeData }) {
         <div className="ib-contact">
           <div>{data.phone}</div>
           <div>{data.email}</div>
-          {data.linkedin && <div><a href={data.linkedin}>LinkedIn</a></div>}
-          {data.github && <div><a href={data.github}>GitHub</a></div>}
+          {data.linkedin && <div>LinkedIn: {data.linkedin}</div>}
+          {data.github && <div>GitHub: {data.github}</div>}
         </div>
       </div>
       {data.summary && (
