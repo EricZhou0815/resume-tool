@@ -1,0 +1,183 @@
+{
+  "name": "Eric Zhou",
+  "title": "Engineering Lead",
+  "email": "eric.zhou0815@gmail.com",
+  "phone": "0212516286",
+  "location": "Christchurch, New Zealand",
+  "linkedin": "https://linkedin.com/in/ericzhou0815",
+  "github": "https://github.com/ericzhou0815",
+  "summary": "Hands-on engineering lead with 7 years delivering production-grade systems across insurance, energy, betting, and enterprise platforms. Combines strong technical depth (TypeScript, C#, Java, React, AWS, Azure) with direct people leadership, technical direction, and delivery ownership. Known for pragmatic, outcomes-focused leadership: identifying bottlenecks early, raising engineering standards, and improving team effectiveness across the full development lifecycle.",
+  "experiences": [
+    {
+      "company": "Jade Software",
+      "position": "Engineering Lead",
+      "period": "Jan 2024 - Present",
+      "location": "Christchurch, NZ",
+      "highlights": [
+        "Led a team of 4 direct reports with structured 1:1s, goal setting, pair programming, and code reviews; defined team standards cutting PR rework by ~40% and halving new-joiner time-to-first-PR from 2 weeks to 1 week.",
+        "Owned delivery and system architecture for a major Australian insurance onboarding portal using micro-frontend architecture.",
+        "Built secure, scalable customer onboarding portals for a UK finance client using React, .NET, and Azure.",
+        "Led API modernisation for an Australian trading group, replacing legacy text-based integrations with OpenAPI-driven services; introduced AI-assisted workflows cutting repetitive implementation effort by ~80%.",
+        "Architected and delivered the Proof of Funds AI platform, integrating Google Document AI with React and Azure to fully automate document evaluation.",
+        "Pioneered AI practices across the production development lifecycle, embedding AI-assisted tooling into code generation, review, and testing workflows."
+      ]
+    },
+    {
+      "company": "SECTION6",
+      "position": "Senior Software Engineer",
+      "period": "Aug 2021 - Dec 2023",
+      "location": "Remote, NZ",
+      "highlights": [
+        "Co-owned engineering hiring pipeline, growing the team by 5 engineers within 12 months.",
+        "Led a timesheet pre-invoicing automation project end-to-end.",
+        "Built a high-throughput data validation service for Vector's energy platform, processing data from millions of meters daily.",
+        "Designed cloud-native solutions using Java, AWS Lambda, DynamoDB, API Gateway, Step Functions, S3, SQS.",
+        "Established CI/CD pipelines using AWS CodeBuild and Terraform.",
+        "Optimised Lambda performance, reducing cold start times by 30% and improving data processing speed by 20%."
+      ]
+    },
+    {
+      "company": "SG Digital",
+      "position": "Software Engineer",
+      "period": "Aug 2019 - Aug 2021",
+      "location": "Wellington, NZ",
+      "highlights": [
+        "Developed and maintained high-traffic sports betting systems using React, Node.js, Java.",
+        "Built new betting products and platform features, contributing to significant revenue uplift for TAB NZ."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "institution": "Lincoln University",
+      "degree": "Master of Applied Computing",
+      "field": "Computing",
+      "start_date": "2023-07",
+      "end_date": "2024-12",
+      "grade": "Distinction",
+      "highlights": []
+    },
+    {
+      "id": "edu-2",
+      "institution": "Unitec",
+      "degree": "Graduate Diploma in Computing",
+      "field": "Computing",
+      "start_date": "2018-02",
+      "end_date": "2018-12",
+      "grade": "",
+      "highlights": []
+    },
+    {
+      "id": "edu-3",
+      "institution": "Tongji University",
+      "degree": "Bachelor of Building Technology and Engineering",
+      "field": "Engineering",
+      "start_date": "2006-09",
+      "end_date": "2010-07",
+      "grade": "",
+      "highlights": []
+    }
+  ],
+  "skill_groups": [
+    {
+      "category": "Languages",
+      "skill_list": [
+        "TypeScript",
+        "C#",
+        "Java",
+        "Python"
+      ]
+    },
+    {
+      "category": "Frameworks",
+      "skill_list": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "FastAPI",
+        ".NET",
+        "Flask"
+      ]
+    },
+    {
+      "category": "Cloud",
+      "skill_list": [
+        "AWS",
+        "Azure",
+        "Docker",
+        "ECS",
+        "Lambda",
+        "API Gateway",
+        "S3",
+        "SQS",
+        "Step Functions"
+      ]
+    },
+    {
+      "category": "Devops",
+      "skill_list": [
+        "CI/CD",
+        "Terraform",
+        "AWS CodeBuild",
+        "Octopus Deploy",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "category": "Ai_llm",
+      "skill_list": [
+        "OpenAI",
+        "Google Document AI",
+        "RAG",
+        "Multi-agent Systems",
+        "Agentic Workflows"
+      ]
+    },
+    {
+      "category": "Architecture",
+      "skill_list": [
+        "System Design",
+        "Microservices",
+        "Event-driven Systems",
+        "API Design",
+        "High Availability"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Runnly-ai — User Story to PR Automation Agents System",
+      "description": "Autonomous AI engineer integrated into the SDLC, capable of processing full user stories end-to-end.",
+      "tech": "AI Agents, LLM, Code Generation",
+      "highlights": [
+        "Designed an autonomous AI engineer that explores codebases, plans implementations, writes changes, and opens PRs with minimal human intervention.",
+        "Solved advanced challenges in context-window management and LLM tool use for self-correcting code generation."
+      ]
+    },
+    {
+      "name": "Interlify — AI Developer SaaS Platform",
+      "description": "AI tooling SaaS platform helping developers integrate APIs with LLMs. Ranked #4 Product of the Day on Product Hunt.",
+      "tech": "Next.js, TypeScript, Python, OpenAI, Groq, PostgreSQL",
+      "highlights": [
+        "Founder & Architect. Designed, built, and launched from scratch.",
+        "Ranked #4 Product of the Day on Product Hunt."
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "level": "Fluent"
+    },
+    {
+      "language": "Cantonese",
+      "level": "Native"
+    },
+    {
+      "language": "Mandarin",
+      "level": "Native"
+    }
+  ],
+  "year": "2026"
+}

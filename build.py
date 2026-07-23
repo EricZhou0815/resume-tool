@@ -241,13 +241,18 @@ def main():
     # Build template context
     context = build_context(profile, exp_filter, proj_filter)
 
-    # Render all templates and build a switchable page
-    all_templates_html = {}
-    for tpl in sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")]):
-        all_templates_html[tpl] = render(tpl, context)
-    
-    page_html = build_switchable_page(all_templates_html, context, args.template)
-    path = save(page_html, args.output)
+    # Save the context as JSON for React to consume
+    json_path = OUTPUT_DIR / "resume-data.json"
+    json_path.write_text(json.dumps(context, ensure_ascii=False, indent=2))
+
+    # Copy to React app's public folder
+    react_public = BASE / "resume-react" / "public"
+    react_public.mkdir(parents=True, exist_ok=True)
+    shutil.copy(json_path, react_public / "resume-data.json")
+
+    # Render single template output for backward compatibility
+    html = render(args.template, context)
+    path = save(html, args.output)
 
     # Copy to output/index.html for Vercel entry point
     shutil.copy(path, OUTPUT_DIR / "index.html")

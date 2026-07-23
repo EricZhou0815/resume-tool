@@ -1,13 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "output/*.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/", "dest": "/output/resume.html" },
-    { "src": "/(.*)", "dest": "/output/$1" }
-  ]
+  "buildCommand": "cd resume-react && npm install && npm run build",
+  "outputDirectory": "resume-react/dist",
+  "installCommand": "cd resume-react && npm install"
 }
