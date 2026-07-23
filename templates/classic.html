@@ -60,16 +60,10 @@
   @media print {
     body { padding: 0; background: white; }
     .page { box-shadow: none; padding: 0.5in; }
-    .download-btn, .template-switcher { display: none; }
   }
 </style>
 </head>
 <body>
-<div class="template-switcher">
-  <button onclick="switchTemplate('modern')">Modern</button>
-  <button class="active" onclick="switchTemplate('classic')">Classic</button>
-</div>
-<div class="download-btn" onclick="window.print()">⬇ PDF</div>
 <div class="page">
   <div class="header">
     <h1>{{ name }}</h1>

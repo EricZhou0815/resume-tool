@@ -77,18 +77,11 @@
   @media print {
     body { padding: 0; background: white; }
     .page { box-shadow: none; min-height: auto; }
-    .download-btn, .template-switcher { display: none; }
     .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
 <body>
-<div class="template-switcher">
-  <button onclick="switchTemplate('modern')">Modern</button>
-  <button onclick="switchTemplate('classic')">Classic</button>
-  <button class="active" onclick="switchTemplate('sidebar')">Sidebar</button>
-</div>
-<div class="download-btn" onclick="window.print()">⬇ PDF</div>
 <div class="page">
   <div class="sidebar">
     <h1>{{ name }}</h1>

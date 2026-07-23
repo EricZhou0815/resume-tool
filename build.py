@@ -241,17 +241,9 @@ def main():
     # Build template context
     context = build_context(profile, exp_filter, proj_filter)
 
-    # Render template
+    # Render single template
     html = render(args.template, context)
-    
-    # Wrap in HTML that includes all templates for client-side switching
-    all_templates_html = []
-    for tpl_name in sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")]):
-        all_templates_html.append(render(tpl_name, context))
-    
-    # Build a page that loads all templates and lets you switch
-    page_html = build_switchable_page(all_templates_html, context, args.template)
-    path = save(page_html, args.output)
+    path = save(html, args.output)
 
     # Copy to output/index.html for Vercel entry point
     shutil.copy(path, OUTPUT_DIR / "index.html")
