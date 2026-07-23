@@ -142,22 +142,22 @@ def save(html: str, name: str = "resume"):
     path.write_text(html)
     return path
 
-def build_switchable_page(templates_html: list, context: dict, active: str) -> str:
-    """Build a page that contains all templates and switches between them via JS."""
-    template_names = sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")])
+def build_switchable_page(templates_html: dict, context: dict, active: str) -> str:
+    """Build a page with a dropdown template switcher."""
+    template_names = sorted(templates_html.keys())
     
-    # Build the switcher bar HTML
-    switcher_buttons = ""
+    # Build dropdown options
+    options = ""
     for name in template_names:
-        active_class = 'active' if name == active else ''
-        label = name.capitalize()
-        switcher_buttons += f'<button class="{active_class}" onclick="switchTemplate(\'{name}\')">{label}</button>'
+        selected = 'selected' if name == active else ''
+        label = name.replace('-', ' ').title()
+        options += f'<option value="{name}" {selected}>{label}</option>'
     
-    # Wrap each template in a div with its name as id
+    # Wrap each template in a div
     template_divs = ""
-    for name, html in zip(template_names, templates_html):
+    for name in template_names:
         display = 'block' if name == active else 'none'
-        template_divs += f'<div id="template-{name}" style="display:{display}">{html}</div>\n'
+        template_divs += f'<div id="template-{name}" style="display:{display}">{templates_html[name]}</div>\n'
     
     page = f'''<!DOCTYPE html>
 <html lang="en">
@@ -166,23 +166,29 @@ def build_switchable_page(templates_html: list, context: dict, active: str) -> s
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{context["name"]} - Resume</title>
 <style>
-  .global-switcher {{
+  .switcher-bar {{
     position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-    z-index: 1000; display: flex; gap: 6px;
-    background: rgba(255,255,255,0.95); padding: 8px 14px;
-    border-radius: 30px; box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+    z-index: 1000; background: rgba(255,255,255,0.95);
+    padding: 10px 18px; border-radius: 30px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 8px;
   }}
-  .global-switcher button {{
-    border: 1px solid #d0d0d0; background: white; padding: 7px 16px;
-    border-radius: 20px; font-size: 13px; cursor: pointer; transition: 0.15s;
+  .switcher-bar label {{ font-size: 13px; color: #555; }}
+  .switcher-bar select {{
+    padding: 6px 12px; border: 1px solid #ccc; border-radius: 20px;
+    font-size: 13px; background: white; cursor: pointer;
+    outline: none;
   }}
-  .global-switcher button.active {{ background: #2563eb; color: white; border-color: #2563eb; }}
-  .global-switcher button:hover:not(.active) {{ background: #f0f0f0; }}
+  .switcher-bar select:focus {{ border-color: #2563eb; }}
+  @media print {{ .switcher-bar {{ display: none; }} }}
 </style>
 </head>
 <body>
-<div class="global-switcher">
-  {switcher_buttons}
+<div class="switcher-bar">
+  <label for="tpl-select">Template:</label>
+  <select id="tpl-select" onchange="switchTemplate(this.value)">
+    {options}
+  </select>
 </div>
 {template_divs}
 <script>
@@ -190,15 +196,9 @@ function switchTemplate(name) {{
   var templates = {json.dumps(template_names)};
   for (var i = 0; i < templates.length; i++) {{
     var el = document.getElementById('template-' + templates[i]);
-    var btn = document.querySelectorAll('.global-switcher button')[i];
-    if (templates[i] === name) {{
-      el.style.display = 'block';
-      btn.classList.add('active');
-    }} else {{
-      el.style.display = 'none';
-      btn.classList.remove('active');
-    }}
+    el.style.display = templates[i] === name ? 'block' : 'none';
   }}
+  document.getElementById('tpl-select').value = name;
 }}
 </script>
 </body>
@@ -241,9 +241,13 @@ def main():
     # Build template context
     context = build_context(profile, exp_filter, proj_filter)
 
-    # Render single template
-    html = render(args.template, context)
-    path = save(html, args.output)
+    # Render all templates and build a switchable page
+    all_templates_html = {}
+    for tpl in sorted([f.stem for f in TEMPLATES_DIR.glob("*.html")]):
+        all_templates_html[tpl] = render(tpl, context)
+    
+    page_html = build_switchable_page(all_templates_html, context, args.template)
+    path = save(page_html, args.output)
 
     # Copy to output/index.html for Vercel entry point
     shutil.copy(path, OUTPUT_DIR / "index.html")

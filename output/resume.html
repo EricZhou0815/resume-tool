@@ -5,6 +5,254 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eric Zhou - Resume</title>
 <style>
+  .switcher-bar {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    z-index: 1000; background: rgba(255,255,255,0.95);
+    padding: 10px 18px; border-radius: 30px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .switcher-bar label { font-size: 13px; color: #555; }
+  .switcher-bar select {
+    padding: 6px 12px; border: 1px solid #ccc; border-radius: 20px;
+    font-size: 13px; background: white; cursor: pointer;
+    outline: none;
+  }
+  .switcher-bar select:focus { border-color: #2563eb; }
+  @media print { .switcher-bar { display: none; } }
+</style>
+</head>
+<body>
+<div class="switcher-bar">
+  <label for="tpl-select">Template:</label>
+  <select id="tpl-select" onchange="switchTemplate(this.value)">
+    <option value="classic" >Classic</option><option value="investment-bank" >Investment Bank</option><option value="modern" selected>Modern</option><option value="sidebar" >Sidebar</option>
+  </select>
+</div>
+<div id="template-classic" style="display:none"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Zhou - Resume</title>
+<style>
+  :root {
+    --text: #222;
+    --muted: #555;
+    --line: #ccc;
+    --bg: #fff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', Georgia, serif;
+    color: var(--text);
+    background: #eee;
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 800px; margin: 0 auto;
+    background: var(--bg); padding: 50px 55px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .title { font-size: 15px; color: var(--muted); margin-top: 4px; }
+  .contact { font-size: 13px; color: var(--muted); margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 18px; }
+  .contact a { color: var(--muted); }
+  .section { margin-bottom: 22px; }
+  .section h2 {
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; border-bottom: 1px solid var(--line);
+    padding-bottom: 4px; margin-bottom: 12px;
+  }
+  .entry { margin-bottom: 16px; }
+  .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .entry-header h3 { font-size: 15px; font-weight: 700; }
+  .entry-header .period { font-size: 13px; color: var(--muted); font-style: italic; }
+  .entry .subtitle { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+  .entry li { font-size: 13px; line-height: 1.5; margin-bottom: 2px; margin-left: 18px; }
+  .skills-line { font-size: 13px; line-height: 1.7; }
+  .skills-line strong { display: inline-block; min-width: 90px; }
+  .download-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #333; color: white; border: none;
+    padding: 10px 18px; border-radius: 4px; font-size: 13px; cursor: pointer;
+    z-index: 100;
+  }
+  .template-switcher {
+    position: fixed; bottom: 24px; left: 24px; z-index: 100;
+    display: flex; gap: 8px;
+  }
+  .template-switcher button {
+    background: #eee; border: 1px solid #ccc; padding: 8px 14px;
+    border-radius: 4px; font-size: 13px; cursor: pointer;
+  }
+  .template-switcher button.active { background: #333; color: white; border-color: #333; }
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; padding: 0.5in; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Eric Zhou</h1>
+    <div class="title">Engineering Lead</div>
+    <div class="contact">
+      <span>Email: eric.zhou0815@gmail.com</span>
+      <span>Phone: 0212516286</span>
+      <span>LinkedIn: <a href="https://linkedin.com/in/ericzhou0815">https://linkedin.com/in/ericzhou0815</a></span>
+      <span>GitHub: <a href="https://github.com/ericzhou0815">https://github.com/ericzhou0815</a></span>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <h2>Summary</h2>
+    <p style="font-size:13px;line-height:1.5;">Hands-on engineering lead with 7 years delivering production-grade systems across insurance, energy, betting, and enterprise platforms. Combines strong technical depth (TypeScript, C#, Java, React, AWS, Azure) with direct people leadership, technical direction, and delivery ownership. Known for pragmatic, outcomes-focused leadership: identifying bottlenecks early, raising engineering standards, and improving team effectiveness across the full development lifecycle.</p>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Experience</h2>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Engineering Lead, Jade Software</h3>
+        <span class="period">Jan 2024 - Present</span>
+      </div>
+      <div class="subtitle">Christchurch, NZ</div>
+      <ul>
+        <li>Led a team of 4 direct reports with structured 1:1s, goal setting, pair programming, and code reviews; defined team standards cutting PR rework by ~40% and halving new-joiner time-to-first-PR from 2 weeks to 1 week.</li><li>Owned delivery and system architecture for a major Australian insurance onboarding portal using micro-frontend architecture.</li><li>Built secure, scalable customer onboarding portals for a UK finance client using React, .NET, and Azure.</li><li>Led API modernisation for an Australian trading group, replacing legacy text-based integrations with OpenAPI-driven services; introduced AI-assisted workflows cutting repetitive implementation effort by ~80%.</li><li>Architected and delivered the Proof of Funds AI platform, integrating Google Document AI with React and Azure to fully automate document evaluation.</li><li>Pioneered AI practices across the production development lifecycle, embedding AI-assisted tooling into code generation, review, and testing workflows.</li>
+      </ul>
+    </div>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Senior Software Engineer, SECTION6</h3>
+        <span class="period">Aug 2021 - Dec 2023</span>
+      </div>
+      <div class="subtitle">Remote, NZ</div>
+      <ul>
+        <li>Co-owned engineering hiring pipeline, growing the team by 5 engineers within 12 months.</li><li>Led a timesheet pre-invoicing automation project end-to-end.</li><li>Built a high-throughput data validation service for Vector's energy platform, processing data from millions of meters daily.</li><li>Designed cloud-native solutions using Java, AWS Lambda, DynamoDB, API Gateway, Step Functions, S3, SQS.</li><li>Established CI/CD pipelines using AWS CodeBuild and Terraform.</li><li>Optimised Lambda performance, reducing cold start times by 30% and improving data processing speed by 20%.</li>
+      </ul>
+    </div>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Software Engineer, SG Digital</h3>
+        <span class="period">Aug 2019 - Aug 2021</span>
+      </div>
+      <div class="subtitle">Wellington, NZ</div>
+      <ul>
+        <li>Developed and maintained high-traffic sports betting systems using React, Node.js, Java.</li><li>Built new betting products and platform features, contributing to significant revenue uplift for TAB NZ.</li>
+      </ul>
+    </div>
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Skills</h2>
+    <div class="skills-line">
+      
+      <strong>Languages:</strong> TypeScript, C#, Java, Python<br>
+      
+      <strong>Frameworks:</strong> React, Next.js, Node.js, FastAPI, .NET, Flask<br>
+      
+      <strong>Cloud:</strong> AWS, Azure, Docker, ECS, Lambda, API Gateway, S3, SQS, Step Functions<br>
+      
+      <strong>Devops:</strong> CI/CD, Terraform, AWS CodeBuild, Octopus Deploy, GitHub Actions<br>
+      
+      <strong>Ai_llm:</strong> OpenAI, Google Document AI, RAG, Multi-agent Systems, Agentic Workflows<br>
+      
+      <strong>Architecture:</strong> System Design, Microservices, Event-driven Systems, API Design, High Availability<br>
+      
+    </div>
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Projects</h2>
+    
+    <div class="entry">
+      <div class="entry-header"><h3>Runnly-ai — User Story to PR Automation Agents System</h3></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:2px;">Autonomous AI engineer integrated into the SDLC, capable of processing full user stories end-to-end.</p>
+      <ul>
+        <li>Designed an autonomous AI engineer that explores codebases, plans implementations, writes changes, and opens PRs with minimal human intervention.</li><li>Solved advanced challenges in context-window management and LLM tool use for self-correcting code generation.</li>
+      </ul>
+    </div>
+    
+    <div class="entry">
+      <div class="entry-header"><h3>Interlify — AI Developer SaaS Platform</h3></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:2px;">AI tooling SaaS platform helping developers integrate APIs with LLMs. Ranked #4 Product of the Day on Product Hunt.</p>
+      <ul>
+        <li>Founder & Architect. Designed, built, and launched from scratch.</li><li>Ranked #4 Product of the Day on Product Hunt.</li>
+      </ul>
+    </div>
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Education</h2>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Lincoln University</h3>
+        <span class="period">2023-07 - 2024-12</span>
+      </div>
+      <div class="subtitle">Master of Applied Computing in Computing</div>
+    </div>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Unitec</h3>
+        <span class="period">2018-02 - 2018-12</span>
+      </div>
+      <div class="subtitle">Graduate Diploma in Computing in Computing</div>
+    </div>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <h3>Tongji University</h3>
+        <span class="period">2006-09 - 2010-07</span>
+      </div>
+      <div class="subtitle">Bachelor of Building Technology and Engineering in Engineering</div>
+    </div>
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>Languages</h2>
+    <p style="font-size:13px;">
+      English (Fluent) · Cantonese (Native) · Mandarin (Native)
+    </p>
+  </div>
+  
+</div>
+<script>
+function switchTemplate(name) {
+  // Reload the page with a query param to tell the backend which template
+  window.location.href = '?template=' + name;
+}
+</script>
+</body>
+</html></div>
+<div id="template-investment-bank" style="display:none"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Zhou - Resume</title>
+<style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Calibri', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -251,5 +499,569 @@
   </div>
   
 </div>
+</body>
+</html></div>
+<div id="template-modern" style="display:block"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Zhou - Resume</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --bg: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    background: #f1f5f9;
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .header {
+    background: var(--primary);
+    color: white;
+    padding: 40px;
+  }
+  .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+  .header .title { font-size: 18px; opacity: 0.9; margin-bottom: 16px; }
+  .header .contact { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; opacity: 0.9; }
+  .header .contact .contact-item { white-space: nowrap; }
+  .header .contact a { color: white; text-decoration: underline; text-underline-offset: 2px; }
+  .content { padding: 32px 40px; }
+  .section { margin-bottom: 28px; }
+  .section h2 {
+    font-size: 16px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--primary);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px; margin-bottom: 16px;
+  }
+  .entry { margin-bottom: 20px; }
+  .entry-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .entry-header h3 { font-size: 16px; font-weight: 600; }
+  .entry-header .period { font-size: 14px; color: var(--muted); }
+  .entry .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+  .entry ul { list-style: none; }
+  .entry li {
+    font-size: 14px; line-height: 1.6;
+    padding-left: 20px; position: relative; margin-bottom: 4px;
+  }
+  .entry li::before { content: "•"; position: absolute; left: 4px; color: var(--primary); }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .skill-group { margin-bottom: 4px; }
+  .skill-group h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tags span {
+    background: #eff6ff; color: var(--primary);
+    padding: 3px 10px; border-radius: 20px; font-size: 12px;
+  }
+  .project-tech { font-size: 12px; color: var(--primary); margin-bottom: 6px; }
+  .lang-item { font-size: 14px; display: inline-block; margin-right: 20px; }
+  .lang-item .level { color: var(--muted); font-size: 13px; }
+  .download-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--primary); color: white; border: none;
+    padding: 12px 20px; border-radius: 30px; font-size: 14px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    z-index: 100; transition: transform 0.15s;
+  }
+  .download-btn:hover { transform: scale(1.05); }
+  .download-btn:active { transform: scale(0.95); }
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; border-radius: 0; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .download-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="download-btn" onclick="window.print()">
+  ⬇ Download PDF
+</div>
+<div class="page">
+  <div class="header">
+    <h1>Eric Zhou</h1>
+    <div class="title">Engineering Lead</div>
+    <div class="contact">
+      <span class="contact-item">Email: eric.zhou0815@gmail.com</span>
+      <span class="contact-item">Phone: 0212516286</span>
+      <span class="contact-item">LinkedIn: <a href="https://linkedin.com/in/ericzhou0815">https://linkedin.com/in/ericzhou0815</a></span>
+      <span class="contact-item">GitHub: <a href="https://github.com/ericzhou0815">https://github.com/ericzhou0815</a></span>
+    </div>
+  </div>
+  <div class="content">
+    
+    <div class="section">
+      <h2>Summary</h2>
+      <p style="font-size:14px;line-height:1.6;color:var(--text);">Hands-on engineering lead with 7 years delivering production-grade systems across insurance, energy, betting, and enterprise platforms. Combines strong technical depth (TypeScript, C#, Java, React, AWS, Azure) with direct people leadership, technical direction, and delivery ownership. Known for pragmatic, outcomes-focused leadership: identifying bottlenecks early, raising engineering standards, and improving team effectiveness across the full development lifecycle.</p>
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Experience</h2>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Engineering Lead · Jade Software</h3>
+          <span class="period">Jan 2024 - Present</span>
+        </div>
+        <div class="subtitle">Christchurch, NZ</div>
+        <ul>
+          <li>Led a team of 4 direct reports with structured 1:1s, goal setting, pair programming, and code reviews; defined team standards cutting PR rework by ~40% and halving new-joiner time-to-first-PR from 2 weeks to 1 week.</li><li>Owned delivery and system architecture for a major Australian insurance onboarding portal using micro-frontend architecture.</li><li>Built secure, scalable customer onboarding portals for a UK finance client using React, .NET, and Azure.</li><li>Led API modernisation for an Australian trading group, replacing legacy text-based integrations with OpenAPI-driven services; introduced AI-assisted workflows cutting repetitive implementation effort by ~80%.</li><li>Architected and delivered the Proof of Funds AI platform, integrating Google Document AI with React and Azure to fully automate document evaluation.</li><li>Pioneered AI practices across the production development lifecycle, embedding AI-assisted tooling into code generation, review, and testing workflows.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Senior Software Engineer · SECTION6</h3>
+          <span class="period">Aug 2021 - Dec 2023</span>
+        </div>
+        <div class="subtitle">Remote, NZ</div>
+        <ul>
+          <li>Co-owned engineering hiring pipeline, growing the team by 5 engineers within 12 months.</li><li>Led a timesheet pre-invoicing automation project end-to-end.</li><li>Built a high-throughput data validation service for Vector's energy platform, processing data from millions of meters daily.</li><li>Designed cloud-native solutions using Java, AWS Lambda, DynamoDB, API Gateway, Step Functions, S3, SQS.</li><li>Established CI/CD pipelines using AWS CodeBuild and Terraform.</li><li>Optimised Lambda performance, reducing cold start times by 30% and improving data processing speed by 20%.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Software Engineer · SG Digital</h3>
+          <span class="period">Aug 2019 - Aug 2021</span>
+        </div>
+        <div class="subtitle">Wellington, NZ</div>
+        <ul>
+          <li>Developed and maintained high-traffic sports betting systems using React, Node.js, Java.</li><li>Built new betting products and platform features, contributing to significant revenue uplift for TAB NZ.</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="skill-tags">
+            <span>TypeScript</span><span>C#</span><span>Java</span><span>Python</span>
+          </div>
+        </div>
+        
+        <div class="skill-group">
+          <h4>Frameworks</h4>
+          <div class="skill-tags">
+            <span>React</span><span>Next.js</span><span>Node.js</span><span>FastAPI</span><span>.NET</span><span>Flask</span>
+          </div>
+        </div>
+        
+        <div class="skill-group">
+          <h4>Cloud</h4>
+          <div class="skill-tags">
+            <span>AWS</span><span>Azure</span><span>Docker</span><span>ECS</span><span>Lambda</span><span>API Gateway</span><span>S3</span><span>SQS</span><span>Step Functions</span>
+          </div>
+        </div>
+        
+        <div class="skill-group">
+          <h4>Devops</h4>
+          <div class="skill-tags">
+            <span>CI/CD</span><span>Terraform</span><span>AWS CodeBuild</span><span>Octopus Deploy</span><span>GitHub Actions</span>
+          </div>
+        </div>
+        
+        <div class="skill-group">
+          <h4>Ai_llm</h4>
+          <div class="skill-tags">
+            <span>OpenAI</span><span>Google Document AI</span><span>RAG</span><span>Multi-agent Systems</span><span>Agentic Workflows</span>
+          </div>
+        </div>
+        
+        <div class="skill-group">
+          <h4>Architecture</h4>
+          <div class="skill-tags">
+            <span>System Design</span><span>Microservices</span><span>Event-driven Systems</span><span>API Design</span><span>High Availability</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Projects</h2>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Runnly-ai — User Story to PR Automation Agents System</h3>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">Autonomous AI engineer integrated into the SDLC, capable of processing full user stories end-to-end.</p>
+        <div class="project-tech">AI Agents, LLM, Code Generation</div>
+        <ul>
+          <li>Designed an autonomous AI engineer that explores codebases, plans implementations, writes changes, and opens PRs with minimal human intervention.</li><li>Solved advanced challenges in context-window management and LLM tool use for self-correcting code generation.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Interlify — AI Developer SaaS Platform</h3>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">AI tooling SaaS platform helping developers integrate APIs with LLMs. Ranked #4 Product of the Day on Product Hunt.</p>
+        <div class="project-tech">Next.js, TypeScript, Python, OpenAI, Groq, PostgreSQL</div>
+        <ul>
+          <li>Founder & Architect. Designed, built, and launched from scratch.</li><li>Ranked #4 Product of the Day on Product Hunt.</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Education</h2>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Lincoln University</h3>
+          <span class="period">2023-07 - 2024-12</span>
+        </div>
+        <div class="subtitle">Master of Applied Computing in Computing</div>
+        
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Unitec</h3>
+          <span class="period">2018-02 - 2018-12</span>
+        </div>
+        <div class="subtitle">Graduate Diploma in Computing in Computing</div>
+        
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Tongji University</h3>
+          <span class="period">2006-09 - 2010-07</span>
+        </div>
+        <div class="subtitle">Bachelor of Building Technology and Engineering in Engineering</div>
+        
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Languages</h2>
+      
+      <span class="lang-item">English <span class="level">(Fluent)</span></span>
+      
+      <span class="lang-item">Cantonese <span class="level">(Native)</span></span>
+      
+      <span class="lang-item">Mandarin <span class="level">(Native)</span></span>
+      
+    </div>
+    
+  </div>
+</div>
+</body>
+</html></div>
+<div id="template-sidebar" style="display:none"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Zhou - Resume</title>
+<style>
+  :root {
+    --primary: #1a3c5e;
+    --accent: #2d7fc1;
+    --text: #333;
+    --muted: #6b7a8a;
+    --bg: #fff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    color: var(--text);
+    background: #e8ecf1;
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 850px; margin: 0 auto;
+    display: flex; min-height: 1000px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+  .sidebar {
+    width: 260px; background: var(--primary);
+    color: white; padding: 36px 24px; flex-shrink: 0;
+  }
+  .sidebar h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .sidebar .title { font-size: 14px; opacity: 0.8; margin-bottom: 24px; }
+  .sidebar-section { margin-bottom: 22px; }
+  .sidebar-section h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    opacity: 0.6; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 4px;
+  }
+  .sidebar .contact-item { font-size: 13px; margin-bottom: 6px; opacity: 0.9; word-break: break-all; }
+  .sidebar .contact-item a { color: white; }
+  .sidebar .skill-tag {
+    display: inline-block; font-size: 12px; padding: 2px 8px;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 12px;
+    margin: 2px 3px 2px 0;
+  }
+  .main {
+    flex: 1; background: var(--bg); padding: 36px 32px;
+  }
+  .main .section { margin-bottom: 24px; }
+  .main .section h2 {
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent);
+    border-bottom: 2px solid #eef2f7;
+    padding-bottom: 6px; margin-bottom: 12px;
+  }
+  .entry { margin-bottom: 18px; }
+  .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .entry-header h3 { font-size: 15px; font-weight: 600; color: var(--primary); }
+  .entry-header .period { font-size: 13px; color: var(--muted); }
+  .entry .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .entry li { font-size: 13px; line-height: 1.5; margin-bottom: 3px; margin-left: 16px; }
+  .download-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--primary); color: white; border: none;
+    padding: 10px 18px; border-radius: 6px; font-size: 13px; cursor: pointer;
+    z-index: 100;
+  }
+  .template-switcher {
+    position: fixed; bottom: 24px; left: 24px; z-index: 100;
+    display: flex; gap: 8px;
+  }
+  .template-switcher button {
+    background: #eee; border: 1px solid #ccc; padding: 8px 14px;
+    border-radius: 6px; font-size: 13px; cursor: pointer;
+  }
+  .template-switcher button.active { background: var(--primary); color: white; border-color: var(--primary); }
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; min-height: auto; }
+    .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="sidebar">
+    <h1>Eric Zhou</h1>
+    <div class="title">Engineering Lead</div>
+
+    <div class="sidebar-section">
+      <h2>Contact</h2>
+      <div class="contact-item">📧 eric.zhou0815@gmail.com</div>
+      <div class="contact-item">📞 0212516286</div>
+      <div class="contact-item">🔗 <a href="https://linkedin.com/in/ericzhou0815">LinkedIn</a></div>
+      <div class="contact-item">💻 <a href="https://github.com/ericzhou0815">GitHub</a></div>
+    </div>
+
+    
+    <div class="sidebar-section">
+      <h2>Skills</h2>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Languages</div>
+        <div>
+          <span class="skill-tag">TypeScript</span><span class="skill-tag">C#</span><span class="skill-tag">Java</span><span class="skill-tag">Python</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Frameworks</div>
+        <div>
+          <span class="skill-tag">React</span><span class="skill-tag">Next.js</span><span class="skill-tag">Node.js</span><span class="skill-tag">FastAPI</span><span class="skill-tag">.NET</span><span class="skill-tag">Flask</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Cloud</div>
+        <div>
+          <span class="skill-tag">AWS</span><span class="skill-tag">Azure</span><span class="skill-tag">Docker</span><span class="skill-tag">ECS</span><span class="skill-tag">Lambda</span><span class="skill-tag">API Gateway</span><span class="skill-tag">S3</span><span class="skill-tag">SQS</span><span class="skill-tag">Step Functions</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Devops</div>
+        <div>
+          <span class="skill-tag">CI/CD</span><span class="skill-tag">Terraform</span><span class="skill-tag">AWS CodeBuild</span><span class="skill-tag">Octopus Deploy</span><span class="skill-tag">GitHub Actions</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Ai_llm</div>
+        <div>
+          <span class="skill-tag">OpenAI</span><span class="skill-tag">Google Document AI</span><span class="skill-tag">RAG</span><span class="skill-tag">Multi-agent Systems</span><span class="skill-tag">Agentic Workflows</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:8px;">
+        <div style="font-size:12px;opacity:0.7;margin-bottom:3px;">Architecture</div>
+        <div>
+          <span class="skill-tag">System Design</span><span class="skill-tag">Microservices</span><span class="skill-tag">Event-driven Systems</span><span class="skill-tag">API Design</span><span class="skill-tag">High Availability</span>
+        </div>
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="sidebar-section">
+      <h2>Languages</h2>
+      
+      <div style="font-size:13px;margin-bottom:3px;">English — Fluent</div>
+      
+      <div style="font-size:13px;margin-bottom:3px;">Cantonese — Native</div>
+      
+      <div style="font-size:13px;margin-bottom:3px;">Mandarin — Native</div>
+      
+    </div>
+    
+  </div>
+
+  <div class="main">
+    
+    <div class="section">
+      <h2>Summary</h2>
+      <p style="font-size:14px;line-height:1.6;">Hands-on engineering lead with 7 years delivering production-grade systems across insurance, energy, betting, and enterprise platforms. Combines strong technical depth (TypeScript, C#, Java, React, AWS, Azure) with direct people leadership, technical direction, and delivery ownership. Known for pragmatic, outcomes-focused leadership: identifying bottlenecks early, raising engineering standards, and improving team effectiveness across the full development lifecycle.</p>
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Experience</h2>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Engineering Lead, Jade Software</h3>
+          <span class="period">Jan 2024 - Present</span>
+        </div>
+        <div class="subtitle">Christchurch, NZ</div>
+        <ul>
+          <li>Led a team of 4 direct reports with structured 1:1s, goal setting, pair programming, and code reviews; defined team standards cutting PR rework by ~40% and halving new-joiner time-to-first-PR from 2 weeks to 1 week.</li><li>Owned delivery and system architecture for a major Australian insurance onboarding portal using micro-frontend architecture.</li><li>Built secure, scalable customer onboarding portals for a UK finance client using React, .NET, and Azure.</li><li>Led API modernisation for an Australian trading group, replacing legacy text-based integrations with OpenAPI-driven services; introduced AI-assisted workflows cutting repetitive implementation effort by ~80%.</li><li>Architected and delivered the Proof of Funds AI platform, integrating Google Document AI with React and Azure to fully automate document evaluation.</li><li>Pioneered AI practices across the production development lifecycle, embedding AI-assisted tooling into code generation, review, and testing workflows.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Senior Software Engineer, SECTION6</h3>
+          <span class="period">Aug 2021 - Dec 2023</span>
+        </div>
+        <div class="subtitle">Remote, NZ</div>
+        <ul>
+          <li>Co-owned engineering hiring pipeline, growing the team by 5 engineers within 12 months.</li><li>Led a timesheet pre-invoicing automation project end-to-end.</li><li>Built a high-throughput data validation service for Vector's energy platform, processing data from millions of meters daily.</li><li>Designed cloud-native solutions using Java, AWS Lambda, DynamoDB, API Gateway, Step Functions, S3, SQS.</li><li>Established CI/CD pipelines using AWS CodeBuild and Terraform.</li><li>Optimised Lambda performance, reducing cold start times by 30% and improving data processing speed by 20%.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Software Engineer, SG Digital</h3>
+          <span class="period">Aug 2019 - Aug 2021</span>
+        </div>
+        <div class="subtitle">Wellington, NZ</div>
+        <ul>
+          <li>Developed and maintained high-traffic sports betting systems using React, Node.js, Java.</li><li>Built new betting products and platform features, contributing to significant revenue uplift for TAB NZ.</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Projects</h2>
+      
+      <div class="entry">
+        <div class="entry-header"><h3>Runnly-ai — User Story to PR Automation Agents System</h3></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:4px;">Autonomous AI engineer integrated into the SDLC, capable of processing full user stories end-to-end.</p>
+        <ul>
+          <li>Designed an autonomous AI engineer that explores codebases, plans implementations, writes changes, and opens PRs with minimal human intervention.</li><li>Solved advanced challenges in context-window management and LLM tool use for self-correcting code generation.</li>
+        </ul>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header"><h3>Interlify — AI Developer SaaS Platform</h3></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:4px;">AI tooling SaaS platform helping developers integrate APIs with LLMs. Ranked #4 Product of the Day on Product Hunt.</p>
+        <ul>
+          <li>Founder & Architect. Designed, built, and launched from scratch.</li><li>Ranked #4 Product of the Day on Product Hunt.</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    
+    <div class="section">
+      <h2>Education</h2>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Lincoln University</h3>
+          <span class="period">2023-07 - 2024-12</span>
+        </div>
+        <div class="subtitle">Master of Applied Computing in Computing</div>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Unitec</h3>
+          <span class="period">2018-02 - 2018-12</span>
+        </div>
+        <div class="subtitle">Graduate Diploma in Computing in Computing</div>
+      </div>
+      
+      <div class="entry">
+        <div class="entry-header">
+          <h3>Tongji University</h3>
+          <span class="period">2006-09 - 2010-07</span>
+        </div>
+        <div class="subtitle">Bachelor of Building Technology and Engineering in Engineering</div>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+<script>
+function switchTemplate(name) {
+  window.location.href = '?template=' + name;
+}
+</script>
+</body>
+</html></div>
+
+<script>
+function switchTemplate(name) {
+  var templates = ["classic", "investment-bank", "modern", "sidebar"];
+  for (var i = 0; i < templates.length; i++) {
+    var el = document.getElementById('template-' + templates[i]);
+    el.style.display = templates[i] === name ? 'block' : 'none';
+  }
+  document.getElementById('tpl-select').value = name;
+}
+</script>
 </body>
 </html>
