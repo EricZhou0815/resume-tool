@@ -33,8 +33,9 @@
   }
   .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
   .header .title { font-size: 18px; opacity: 0.9; margin-bottom: 16px; }
-  .header .contact { display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; opacity: 0.85; }
-  .header .contact a { color: white; text-decoration: none; }
+  .header .contact { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; opacity: 0.9; }
+  .header .contact .contact-item { white-space: nowrap; }
+  .header .contact a { color: white; text-decoration: underline; text-underline-offset: 2px; }
   .content { padding: 32px 40px; }
   .section { margin-bottom: 28px; }
   .section h2 {
@@ -94,11 +95,11 @@
     <h1>Eric Zhou</h1>
     <div class="title">Engineering Lead</div>
     <div class="contact">
-      <span>eric.zhou0815@gmail.com</span>
-      <span>0212516286</span>
-      <span>Christchurch, New Zealand</span>
-      <a href="https://linkedin.com/in/ericzhou0815">LinkedIn</a>
-      <a href="https://github.com/ericzhou0815">GitHub</a>
+      <span class="contact-item">eric.zhou0815@gmail.com</span>
+      <span class="contact-item">0212516286</span>
+      <span class="contact-item">Christchurch, New Zealand</span>
+      <span class="contact-item"><a href="https://linkedin.com/in/ericzhou0815">https://linkedin.com/in/ericzhou0815</a></span>
+      <span class="contact-item"><a href="https://github.com/ericzhou0815">https://github.com/ericzhou0815</a></span>
     </div>
   </div>
   <div class="content">
