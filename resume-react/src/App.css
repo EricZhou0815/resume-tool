@@ -71,7 +71,7 @@ body {
 /* ─── Sidebar Template ─── */
 .sb-page { display: flex; min-height: 297mm; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 .sb-sidebar {
-  width: 25%; background: #1a3c5e; color: white;
+  width: 33.33%; background: #1a3c5e; color: white;
   padding: 28px 18px; flex-shrink: 0;
 }
 .sb-sidebar .sb-name { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
