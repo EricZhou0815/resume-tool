@@ -95,11 +95,11 @@
     <h1>{{ name }}</h1>
     <div class="title">{{ title }}</div>
     <div class="contact">
-      <span class="contact-item">{{ email }}</span>
-      <span class="contact-item">{{ phone }}</span>
-      <span class="contact-item">{{ location }}</span>
-      {% if linkedin %}<span class="contact-item"><a href="{{ linkedin }}">{{ linkedin }}</a></span>{% endif %}
-      {% if github %}<span class="contact-item"><a href="{{ github }}">{{ github }}</a></span>{% endif %}
+      <span class="contact-item">Email: {{ email }}</span>
+      <span class="contact-item">Phone: {{ phone }}</span>
+      <span class="contact-item">Location: {{ location }}</span>
+      {% if linkedin %}<span class="contact-item">LinkedIn: <a href="{{ linkedin }}">{{ linkedin }}</a></span>{% endif %}
+      {% if github %}<span class="contact-item">GitHub: <a href="{{ github }}">{{ github }}</a></span>{% endif %}
     </div>
   </div>
   <div class="content">
